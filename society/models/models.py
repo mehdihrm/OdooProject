@@ -10,7 +10,10 @@ class society(models.Model):
 
     name = fields.Char('Name',required=True)
     age = fields.Integer('Age', required=True)
+    phone_number = fields.Char('Phone Number')
+
     departement = fields.Char('Departement',default='Departement A')
+    
     gender = fields.Selection(selection=[('male','Male'),('female','Female')])
     adress = fields.Text('Adress',required=True)
     salary = fields.Float('Salary',required=True)
