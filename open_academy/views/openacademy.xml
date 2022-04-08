@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!--this is action  course_list -->
-    <record model="ir.actions.act.window" id="course_list">
+<!--view form -->
+    <record model="ir.ui.view" id="course_form_view" >
+      <field name="name">course.form</field>
+      <field name="model">open_academy.course</field>
+      <field name="arch" type="xml">
+          <form string="course Form">
+              <separator string="General" colspan="2" />
+                  <notebook>
+                      <page string="page1">
+                        <!-- <separator string="General" colspan="2" />-->
+                          <h1>fORM View </h1>
+                           <h5><field name="name"/></h5>
+                           <field name="description"/>
+                           <field name="year"/>
+                      </page>
+                      <page string ="page2">
+                          This is my example of notrbooks
+                      </page>
+                  </notebook>
+          </form>
+      </field>
+    </record>
+    <!--view terr -->
+    <record model="ir.ui.view" id="course_tree_view" >
+      <field name="name">course.tree</field>
+      <field name="model">open_academy.course</field>
+      <field name="arch" type="xml">
+          <tree string="course tree">
+              <field name="name"/>
+              <field name="description"/>
+              <field name="year"/>
+          </tree>
+      </field>
+    </record>
 
+    <!--view search-->
+
+    <record model="ir.ui.view" id="course_seach_view">
+      <field name="name">course.search</field>
+      <field name="model">open_academy.course</field>
+      <field name="arch" type="xml">
+          <search string="course search">
+              <field name="name"/>
+              <field name="description"/>
+              <field name="year"/>
+          </search>
+      </field>
+    </record>
+
+    ======================================================
+    <!--this is action  course_list -->
+   <!-- <record model="ir.actions.act.window" id="course_list">
         <field name="name">Curses</field>
         <field name="res_model">open_academy.course</field>
         <field name="view_mode">tree,form</field>
-        <field name="help" type="html"><p class="o_view_nocontent_smiling_face">
-            create the first course
-        </p>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create the first course
+            </p>
         </field>
-    </record>
+    </record>-->
+    <record model="ir.actions.act_window" id="course_list">
+    <field name="name">Curses</field>
+    <field name="res_model">open_academy.course</field>
+    <field name="view_mode">tree,form</field>
+   </record>
 
     <!-- my menu  (open ACademy =>open Academy2 =>Courses) -->
 
