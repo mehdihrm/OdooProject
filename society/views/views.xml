@@ -1,6 +1,7 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
+
     <!-- employee list view display-->
 
     <record model="ir.ui.view" id="society.list">
@@ -27,6 +28,7 @@
         </tree>
       </field>
     </record>
+    <!-- -->
 
 
     <!-- actions opening views on models -->
@@ -43,7 +45,13 @@
       <field name="res_model">society.client</field>
       <field name="view_mode">tree,form</field>
     </record>
-
+    <!-- product action-->
+     <record model="ir.actions.act_window" id="society.action_window3">
+      <field name="name">Society Product Managing</field>
+      <field name="res_model">society.product</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
 
 
     <!-- Search -->
@@ -94,6 +102,30 @@
                 <group expand="1" string="Group By">
                   <filter string="Birth Date" name="birth_date"
                   context="{'group_by':'birth_date','residual_visible':True}"/>
+                </group>
+                  
+                    
+              </search>
+            </field>
+          </record>
+           <!-- Client Search -->
+
+      <record id="society.product_view_search" model="ir.ui.view">
+            <field name="name">society.product.view.search</field>
+            <field name="model">society.product</field>
+            <field name="arch" type="xml">
+              <search string="Products">
+                <field name="name" string="Product Name"/>
+                <field name="category" string="Category"/>
+                <filter string="Active"
+                        name="active"
+                        domain="[('active','=','True')]"
+                        />
+
+
+                <group expand="1" string="Group By">
+                  <filter string="Category" name="category"
+                  context="{'group_by':'category','residual_visible':True}"/>
                 </group>
                   
                     
@@ -176,6 +208,32 @@
         </form>
       </field>
     </record>
+    <!-- form view product-->
+    <record id="society_product_view_form" model="ir.ui.view">
+      <field name="name">society.product.view.form</field>
+      <field name="model">society.product</field>
+      <field name="arch" type="xml">
+        <form string="Products List">
+            <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="category"/>
+                        </group> 
+                        <group>
+                            <field name="price"/>
+                        </group> 
+                        <group>
+                            <field name="active"/>
+                        </group>                                           
+                    </group>
+    </sheet>
+        </form>
+      </field>
+    </record>
+
 
 
 
@@ -203,6 +261,9 @@
         </menuitem>
         <menuitem id="society_first_level_menu2" name="Client">
             <menuitem id="society_client_menu_action" action="society.action_window2"/>
+        </menuitem>
+        <menuitem id="society_first_level_menu3" name="Product">
+            <menuitem id="society_product_menu_action" action="society.action_window3"/>
         </menuitem>
     </menuitem>
     
