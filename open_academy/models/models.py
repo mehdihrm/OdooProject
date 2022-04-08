@@ -4,10 +4,9 @@ from odoo import models,fields
 class course (models.Model):
         _name = 'open_academy.course'
         _description = "openAcademycoureses"
-        description = fields.Text()
         name = fields.Char(string="title" , required=True)
-
-#     value = fields.Integer()
+        description = fields.Text()
+        year= fields.Date()
 #     value2 = fields.Float(compute="_value_pc", store=True)
 #     description = fields.Text()
 #
