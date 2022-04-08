@@ -46,6 +46,7 @@ class society(models.Model):
     category = fields.Selection(selection = [('phone','Phone'),('computer','Computer'),('smarttv','SmartTv')])
     price = fields.Float('Price',required=True)
     active = fields.Boolean('Active',default=False)
+    seller_id = fields.Many2one("society.employee",string="Seller")
 
 
     

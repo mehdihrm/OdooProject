@@ -28,6 +28,19 @@
         </tree>
       </field>
     </record>
+    <!-- client list view display-->
+    <record model="ir.ui.view" id="society.list_product">
+      <field name="name">society product list</field>
+      <field name="model">society.product</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="category"/>
+          <field name="price"/>
+          <field name="seller_id"/>
+        </tree>
+      </field>
+    </record>
     <!-- -->
 
 
@@ -227,7 +240,10 @@
                         </group> 
                         <group>
                             <field name="active"/>
-                        </group>                                           
+                        </group>     
+                        <group>
+                            <field name="seller_id"/>
+                        </group>                                       
                     </group>
     </sheet>
         </form>
@@ -259,9 +275,11 @@
         <menuitem id="society_first_level_menu" name="Employee">
             <menuitem id="society_employee_menu_action" action="society.action_window"/>
         </menuitem>
+
         <menuitem id="society_first_level_menu2" name="Client">
             <menuitem id="society_client_menu_action" action="society.action_window2"/>
         </menuitem>
+
         <menuitem id="society_first_level_menu3" name="Product">
             <menuitem id="society_product_menu_action" action="society.action_window3"/>
         </menuitem>
