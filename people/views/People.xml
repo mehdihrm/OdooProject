@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="ppl_list_action">
+        <field name="name">People</field>
+        <field name="res_model">people.people</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                i m just tryin' to implement my first menu odoo so you ll find nothing here ...:/
+                by Noura, your lover
+            </p>
+            <a href="https://www.youtube.com/"><span style="color:red; font-weight:lighter;">Go Youtube</span> bilma i got sm design idea ;)</a>
+            <p>I m start loving these stuff</p>
+        </field>
+    </record>
+
+    <menuitem id="main_ppl_menu" name="People"/>
+
+    <menuitem id="ppl_menu" name="People" parent="main_ppl_menu"/>
+
+    <menuitem id="second_ppl_menu" name="People Again" parent="ppl_menu" action="ppl_list_action"/>
+
+</odoo>
