@@ -23,6 +23,37 @@
       <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- form view-->
+    <record id="society_employee_view_form" model="ir.ui.view">
+      <field name="name">society.employee.view.form</field>
+      <field name="model">society.employee</field>
+      <field name="arch" type="xml">
+        <form string="Employee List">
+            <sheet>
+        <group>
+            <group>
+                <field name="name"/>
+            </group>
+            <group>
+                <field name="departement"/>
+            </group>
+            <group>
+                <field name="status"/>
+            </group>
+            <group>
+                <field name="salary"/>
+            </group>
+            <notebook>
+                <page string="Adress">
+                    <field name="adress"/>
+                </page>
+            </notebook>
+        </group>
+    </sheet>
+        </form>
+      </field>
+    </record>
+
 
     <!-- server action to the one above -->
 <!--
