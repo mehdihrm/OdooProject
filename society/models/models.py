@@ -16,4 +16,4 @@ class society(models.Model):
     salary = fields.Float('Salary',required=True)
     
     active = fields.Boolean('Active',default=False)
-
+    status = fields.Selection(selection = [('new','New'),('manager','Manager'),('Chief','chief')])
