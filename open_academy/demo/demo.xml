@@ -1,0 +1,15 @@
+<odoo>
+
+       <record modle="open_academy.course" id="Course0">
+          <field name="title">math</field>
+          <field name="description">math 01</field>
+       </record>
+       <record modle="open_academy.course" id="Course1">
+          <field name="title">PC</field>
+          <field name="description">PC 11</field>
+       </record>
+           <record modle="open_academy.course" id="Course2">
+          <field name="title">SVT</field>
+       </record>
+
+</odoo>
