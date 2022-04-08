@@ -23,6 +23,28 @@
       <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="society.employee_view_search" model="ir.ui.view">
+      <field name="name">society.employee.view.search</field>
+      <field name="model">society.employee</field>
+      <field name="arch" type="xml">
+        <search string="Employees">
+          <field name="name" string="Employee Name"/>
+          <field name="phone_number" string="Phone Number"/>
+
+          <field name="departement" />
+          <field name="adress" />  
+          <!-- <filter string="Archived" name="inactive"
+          domain="[('active','=',False)]"/> -->
+          <group expand="1" string="Group By">
+            <filter string="Departement" name="departement"
+            context="{'group_by':'departement','residual_visible':True}"/>
+          </group>
+            
+              
+        </search>
+      </field>
+    </record>
+
     <!-- form view-->
     <record id="society_employee_view_form" model="ir.ui.view">
       <field name="name">society.employee.view.form</field>
@@ -35,13 +57,25 @@
                 <field name="name"/>
             </group>
             <group>
-                <field name="departement"/>
+                <field name="phone_number"/>
+            </group>
+            <group>
+                <field name="departement" class="mb16"/>
             </group>
             <group>
                 <field name="status"/>
             </group>
             <group>
                 <field name="salary"/>
+            </group>
+            <group>
+                <field name="age"/>
+            </group>
+            <group>
+                <field name="gender"/>
+            </group>
+            <group>
+                <field name="active"/>
             </group>
             <notebook>
                 <page string="Adress">
