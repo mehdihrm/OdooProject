@@ -26,15 +26,14 @@ class society(models.Model):
     _description = 'f_society client'
 
     name = fields.Char('Name',required=True)
-    age = fields.Integer('Age', required=True)
+    birth_date = fields.Date('Date of birth',required=True)
     phone_number = fields.Char('Phone Number')
     adress = fields.Text('Adress',required=True)
     active = fields.Boolean('Active',default=False)
 
 class society(models.Model):
     _name = 'society'
-    _description = 'f_society client'
-
+    _description = 'f_society'
     society_name = fields.Char('Name',required=True,readonly=True)
     population = fields.Integer('Age', required=True,readonly=True)
    

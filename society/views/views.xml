@@ -1,6 +1,7 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
+    <!-- employee list view display-->
 
     <record model="ir.ui.view" id="society.list">
       <field name="name">society list</field>
@@ -13,15 +14,40 @@
         </tree>
       </field>
     </record>
+    <!-- client list view display-->
+    <record model="ir.ui.view" id="society.list_client">
+      <field name="name">society client list</field>
+      <field name="model">society.client</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="phone_number"/>
+          <field name="birth_date"/>
+          
+        </tree>
+      </field>
+    </record>
 
 
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="society.action_window">
-      <field name="name">Society module window</field>
+      <field name="name">Society Employee Managing</field>
       <field name="res_model">society.employee</field>
       <field name="view_mode">tree,form</field>
     </record>
+    <!-- client action-->
+
+    <record model="ir.actions.act_window" id="society.action_window2">
+      <field name="name">Society Client Managing</field>
+      <field name="res_model">society.client</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- Search -->
+    <!-- Employee Search -->
 
     <record id="society.employee_view_search" model="ir.ui.view">
       <field name="name">society.employee.view.search</field>
@@ -33,8 +59,6 @@
 
           <field name="departement" />
           <field name="adress" />  
-          <!-- <filter string="Archived" name="inactive"
-          domain="[('active','=',False)]"/> -->
 
 
           <filter string="Active"
@@ -52,8 +76,34 @@
         </search>
       </field>
     </record>
+    <!-- Client Search -->
+
+      <record id="society.client_view_search" model="ir.ui.view">
+            <field name="name">society.client.view.search</field>
+            <field name="model">society.client</field>
+            <field name="arch" type="xml">
+              <search string="Clients">
+                <field name="name" string="Client Name"/>
+                <field name="phone_number" string="Phone Number"/>
+                <filter string="Active"
+                        name="active"
+                        domain="[('active','=','True')]"
+                        />
+
+
+                <group expand="1" string="Group By">
+                  <filter string="Birth Date" name="birth_date"
+                  context="{'group_by':'birth_date','residual_visible':True}"/>
+                </group>
+                  
+                    
+              </search>
+            </field>
+          </record>
 
     <!-- form view-->
+    <!-- form view employee-->
+
     <record id="society_employee_view_form" model="ir.ui.view">
       <field name="name">society.employee.view.form</field>
       <field name="model">society.employee</field>
@@ -96,6 +146,38 @@
       </field>
     </record>
 
+    <!-- form view client-->
+    <record id="society_client_view_form" model="ir.ui.view">
+      <field name="name">society.client.view.form</field>
+      <field name="model">society.client</field>
+      <field name="arch" type="xml">
+        <form string="Client List">
+            <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="phone_number"/>
+                        </group> 
+                        <group>
+                            <field name="birth_date"/>
+                        </group> 
+                        <group>
+                            <field name="active"/>
+                        </group>                      
+                        <notebook>
+                            <page string="Adress">
+                                <field name="adress"/>
+                            </page>
+                        </notebook>
+                    </group>
+    </sheet>
+        </form>
+      </field>
+    </record>
+
+
 
     <!-- server action to the one above -->
 <!--
@@ -116,10 +198,14 @@
     <!-- Top menu item -->
 
     <menuitem id="society.menu_root" name="society">
-        <menuitem id="society_first_level_menu" name="First Level">
+        <menuitem id="society_first_level_menu" name="Employee">
             <menuitem id="society_employee_menu_action" action="society.action_window"/>
         </menuitem>
+        <menuitem id="society_first_level_menu2" name="Client">
+            <menuitem id="society_client_menu_action" action="society.action_window2"/>
+        </menuitem>
     </menuitem>
+    
     
 
     <!-- menu categories -->
