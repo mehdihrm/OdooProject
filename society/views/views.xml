@@ -42,6 +42,17 @@
       </field>
     </record>
     <!-- -->
+    <!-- client list view display-->
+    <record model="ir.ui.view" id="society.list_product_tag">
+      <field name="name">society product tag list</field>
+      <field name="model">society.product.tag</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>         
+        </tree>
+      </field>
+    </record>
+    <!-- -->
 
 
     <!-- actions opening views on models -->
@@ -62,6 +73,12 @@
      <record model="ir.actions.act_window" id="society.action_window3">
       <field name="name">Society Product Managing</field>
       <field name="res_model">society.product</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- product tag action-->
+     <record model="ir.actions.act_window" id="society.action_window4">
+      <field name="name">Society Product Tags</field>
+      <field name="res_model">society.product.tag</field>
       <field name="view_mode">tree,form</field>
     </record>
     
@@ -233,6 +250,9 @@
                             <field name="name"/>
                         </group>
                         <group>
+                            <field name="tag" widget="many2many_tags"/>
+                        </group>
+                        <group>
                             <field name="category"/>
                         </group> 
                         <group>
@@ -246,6 +266,22 @@
                         </group>                                       
                     </group>
     </sheet>
+        </form>
+      </field>
+    </record>
+    <!-- form view tag product-->
+    <record id="society_product_tag_view_form" model="ir.ui.view">
+      <field name="name">society.product.tag.view.form</field>
+      <field name="model">society.product.tag</field>
+      <field name="arch" type="xml">
+        <form string="Tag List">
+            <sheet>
+                    
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        
+            </sheet>
         </form>
       </field>
     </record>
@@ -282,6 +318,9 @@
 
         <menuitem id="society_first_level_menu3" name="Product">
             <menuitem id="society_product_menu_action" action="society.action_window3"/>
+        </menuitem>
+        <menuitem id="society_first_level_menu4" name="Tags">
+            <menuitem id="society_product_tags_menu_action" action="society.action_window4"/>
         </menuitem>
     </menuitem>
     
