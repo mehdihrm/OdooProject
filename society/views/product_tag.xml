@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <!-- tag list view display-->
+    <record model="ir.ui.view" id="society.list_product_tag">
+      <field name="name">society product tag list</field>
+      <field name="model">society.product.tag</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>         
+        </tree>
+      </field>
+    </record>
+
+    <!-- product tag action-->
+     <record model="ir.actions.act_window" id="society.action_window4">
+      <field name="name">Society Product Tags</field>
+      <field name="res_model">society.product.tag</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- form view tag product-->
+    <record id="society_product_tag_view_form" model="ir.ui.view">
+      <field name="name">society.product.tag.view.form</field>
+      <field name="model">society.product.tag</field>
+      <field name="arch" type="xml">
+        <form string="Tag List">
+            <sheet>
+                    
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        
+            </sheet>
+        </form>
+      </field>
+    </record>
+
+    <menuitem id="society_first_level_menu4" name="Tags" parent="society.menu_root"> 
+            <menuitem id="society_product_tags_menu_action" action="society.action_window4"/>
+        </menuitem>
+    
+    </data>
+    
+
+</odoo>

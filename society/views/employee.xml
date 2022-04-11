@@ -1,0 +1,101 @@
+<odoo>
+  <data>
+                <!-- actions opening views on models -->
+
+                <record model="ir.actions.act_window" id="society.action_window">
+                <field name="name">Society Employee Managing</field>
+                <field name="res_model">society.employee</field>
+                <field name="view_mode">tree,form</field>
+                </record>
+            <!-- employee list view display-->
+
+                <record model="ir.ui.view" id="society.list">
+                <field name="name">society list</field>
+                <field name="model">society.employee</field>
+                <field name="arch" type="xml">
+                    <tree>
+                    <field name="name"/>
+                    <field name="departement"/>
+                    <field name="status"/>
+                    </tree>
+                </field>
+                </record>
+                <!-- Employee Search -->
+
+            <record id="society.employee_view_search" model="ir.ui.view">
+            <field name="name">society.employee.view.search</field>
+            <field name="model">society.employee</field>
+            <field name="arch" type="xml">
+                <search string="Employees">
+                <field name="name" string="Employee Name"/>
+                <field name="phone_number" string="Phone Number"/>
+
+                <field name="departement" />
+                <field name="adress" />  
+
+
+                <filter string="Active"
+                        name="active"
+                        domain="[('active','=','True')]"
+                        />
+
+
+                <group expand="1" string="Group By">
+                    <filter string="Departement" name="departement"
+                    context="{'group_by':'departement','residual_visible':True}"/>
+                </group>
+                    
+                    
+                </search>
+            </field>
+            </record>
+
+            <!-- form view employee-->
+
+    <record id="society_employee_view_form" model="ir.ui.view">
+      <field name="name">society.employee.view.form</field>
+      <field name="model">society.employee</field>
+      <field name="arch" type="xml">
+        <form string="Employee List">
+            <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="phone_number"/>
+                        </group>
+                        <group>
+                            <field name="departement" class="mb16"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="salary"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="gender" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Adress">
+                                <field name="adress"/>
+                            </page>
+                        </notebook>
+                    </group>
+    </sheet>
+        </form>
+      </field>
+    </record>
+    <menuitem id="society.menu_employee" name="Employee" parent="society.menu_root"/>
+
+    <menuitem id="second_ppl_menu" name="Managing Employees" parent="society.menu_employee" action="society.action_window"/>
+
+  </data>
+</odoo>

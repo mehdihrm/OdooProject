@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        
+
+    <!-- client action-->
+
+    <record model="ir.actions.act_window" id="society.action_window2">
+      <field name="name">Society Client Managing</field>
+      <field name="res_model">society.client</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="society_first_level_menu2" name="Client" parent="society.menu_root">
+            <menuitem id="society_client_menu_action" action="society.action_window2"/>
+        </menuitem>
+    <!-- client list view display-->
+    <record model="ir.ui.view" id="society.list_client">
+      <field name="name">society client list</field>
+      <field name="model">society.client</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="phone_number"/>
+          <field name="birth_date"/>
+          
+        </tree>
+      </field>
+    </record>
+
+    <!-- Client Search -->
+
+      <record id="society.client_view_search" model="ir.ui.view">
+            <field name="name">society.client.view.search</field>
+            <field name="model">society.client</field>
+            <field name="arch" type="xml">
+              <search string="Clients">
+                <field name="name" string="Client Name"/>
+                <field name="phone_number" string="Phone Number"/>
+                <filter string="Active"
+                        name="active"
+                        domain="[('active','=','True')]"
+                        />
+
+
+                <group expand="1" string="Group By">
+                  <filter string="Birth Date" name="birth_date"
+                  context="{'group_by':'birth_date','residual_visible':True}"/>
+                </group>
+                  
+                    
+              </search>
+            </field>
+          </record>
+
+          <!-- form view client-->
+    <record id="society_client_view_form" model="ir.ui.view">
+      <field name="name">society.client.view.form</field>
+      <field name="model">society.client</field>
+      <field name="arch" type="xml">
+        <form string="Client List">
+            <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="phone_number"/>
+                        </group> 
+                        <group>
+                            <field name="birth_date"/>
+                        </group> 
+                        <group>
+                            <field name="active"/>
+                        </group>                      
+                        <notebook>
+                            <page string="Adress">
+                                <field name="adress"/>
+                            </page>
+                        </notebook>
+                    </group>
+    </sheet>
+        </form>
+      </field>
+    </record>
+        
+    
+    </data>
+    
+
+</odoo>

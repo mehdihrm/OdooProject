@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+ <!-- product action-->
+     <record model="ir.actions.act_window" id="society.action_window3">
+      <field name="name">Society Product Managing</field>
+      <field name="res_model">society.product</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+        <!-- product list view display-->
+    <record model="ir.ui.view" id="society.list_product">
+      <field name="name">society product list</field>
+      <field name="model">society.product</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="category"/>
+          <field name="price"/>
+          <field name="seller_id"/>
+        </tree>
+      </field>
+    </record>
+    
+    </data>
+
+    <!-- Product Search -->
+
+      <record id="society.product_view_search" model="ir.ui.view">
+            <field name="name">society.product.view.search</field>
+            <field name="model">society.product</field>
+            <field name="arch" type="xml">
+              <search string="Products">
+                <field name="name" string="Product Name"/>
+                <field name="category" string="Category"/>
+                <filter string="Active"
+                        name="active"
+                        domain="[('active','=','True')]"
+                        />
+
+
+                <group expand="1" string="Group By">
+                  <filter string="Category" name="category"
+                  context="{'group_by':'category','residual_visible':True}"/>
+                </group>
+                  
+                    
+              </search>
+            </field>
+          </record>
+ <!-- form view product-->
+    <record id="society_product_view_form" model="ir.ui.view">
+      <field name="name">society.product.view.form</field>
+      <field name="model">society.product</field>
+      <field name="arch" type="xml">
+        <form string="Products List">
+            <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="tag" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="category"/>
+                        </group> 
+                        <group>
+                            <field name="price"/>
+                        </group> 
+                        <group>
+                            <field name="active"/>
+                        </group>     
+                        <group>
+                            <field name="seller_id"/>
+                        </group>                                       
+                    </group>
+    </sheet>
+        </form>
+      </field>
+    </record>
+
+    <menuitem id="society_first_level_menu3" name="Product" parent="society.menu_root">
+            <menuitem id="society_product_menu_action" action="society.action_window3"/>
+        </menuitem>
+    
+
+</odoo>
