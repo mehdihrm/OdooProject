@@ -27,6 +27,10 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/employee.xml',
+        'views/client.xml',
+        'views/product.xml',
+        'views/product_tag.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
