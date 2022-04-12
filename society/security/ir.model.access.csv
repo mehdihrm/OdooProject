@@ -3,4 +3,5 @@ access_society_employee,access_society_employee,society.model_society_employee,b
 access_society_client,access_society_client,society.model_society_client,base.group_user,1,1,1,1
 access_society_product,access_society_product,society.model_society_product,base.group_user,1,1,1,1
 access_society_product_tag,access_society_product_tag,society.model_society_product_tag,base.group_user,1,1,1,1
+access_society_product_sell,access_society_product_sell,society.model_society_product_sell,base.group_user,1,1,1,1
 society.access_society,access_society,society.model_society,base.group_user,1,0,0,0

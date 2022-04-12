@@ -10,3 +10,6 @@ class society(models.Model):
     price = fields.Float('Price',required=True)
     active = fields.Boolean('Active',default=False)
     seller_id = fields.Many2one("society.employee",string="Seller")
+
+def getPrice(self):
+    return self.price

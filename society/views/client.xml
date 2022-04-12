@@ -74,10 +74,14 @@
                         </group> 
                         <group>
                             <field name="active"/>
+                            
                         </group>                      
                         <notebook>
                             <page string="Adress">
                                 <field name="adress"/>
+                                <group>
+                            
+                        </group> 
                             </page>
                         </notebook>
                     </group>
