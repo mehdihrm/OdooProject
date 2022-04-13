@@ -6,3 +6,4 @@ class society(models.Model):
     _descirption = 'f_society tag'
 
     name = fields.Char('Name',required=True)
+    color = fields.Integer()

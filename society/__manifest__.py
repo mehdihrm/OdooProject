@@ -31,6 +31,7 @@
         'views/client.xml',
         'views/product.xml',
         'views/product_tag.xml',
+        #'views/customer.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

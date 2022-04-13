@@ -1,3 +1,4 @@
+from random import randint
 from attr import field
 from odoo import models, fields, api
 
@@ -10,6 +11,11 @@ class society(models.Model):
     price = fields.Float('Price',required=True)
     active = fields.Boolean('Active',default=False)
     seller_id = fields.Many2one("society.employee",string="Seller")
+    _sql_constraints = [
+        ('check_price', 'price > 0)',
+         'The product quantity must be superior to 0')
+    ]
+
 
 def getPrice(self):
     return self.price
