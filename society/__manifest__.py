@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','web'],
+    'depends': ['base','web','account'],
 
     # always loaded
     'data': [
@@ -32,6 +32,7 @@
         'views/product.xml',
         'views/product_tag.xml',
         'views/user_view.xml',
+        'views/account_view.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

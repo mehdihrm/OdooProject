@@ -125,6 +125,7 @@
                               <group>
                                   <field name="product_id"/>
                                   <field name="client_buyer"/>
+                                  <field name="client_buyer_id"/>
                                   <field name="product_quantity"/>
                                   <field name="product_price"/>
                                   <field name="total"/>
