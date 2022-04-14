@@ -238,18 +238,7 @@
             </field>
         </record>
 
-        <record id="view_users_form" model="ir.ui.view">
-            <field name="name">res.users.form.inherit.society</field>
-            <field name="model">res.users</field>
-            <field name="inherit_id" ref="base.view_users_form"/>
-            <field name="arch" type="xml">
-                <notebook position="inside">
-                    <page name="users_edit_form" string="My Name : ">
-                        <field name="myname"/>
-                    </page>
-                </notebook>
-            </field>
-        </record>
+
 
 
         <!-- actions -->

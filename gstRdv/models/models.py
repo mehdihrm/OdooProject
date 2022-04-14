@@ -147,10 +147,6 @@ class symptomes(models.Model):
         return result
 
 
-class ResUsers(models.Model):
-    _inherit = 'res.users'
-
-    myname = fields.Char(string='My Name : ')
 
 
 
