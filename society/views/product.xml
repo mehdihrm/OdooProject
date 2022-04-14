@@ -112,8 +112,11 @@
       <field name="arch" type="xml">
         <form string="Products List">
             <header>
-        <button name="cancel_deal" type="object" string="Cancel" attrs="{'invisible': [('state', '=', False)]}" />
-        <button name="activate_deal" type="object" string="Activate" attrs="{'invisible': [('state', '=', True)]}"/>
+        <button name="cancel_deal" type="object" string="Cancel" class="oe_highlight" attrs="{'invisibl
+        e': [('state', '=', False)]}" />
+        <button name="activate_deal" type="object" string="Activate" class="oe_highlight" attrs="{'invisible': [('state', '=', True)]}"/>
+        <button name="confirm_sell" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible': [('sold', '=', True)]}"/>
+
         <field name="state"/>
 
         </header>
@@ -126,13 +129,17 @@
                                   <field name="product_price"/>
                                   <field name="total"/>
                                   <field name="delivery_date"/>
-
+                                  
                               </group>
                     </group>
                               <notebook>
                                 <page name="Test" string="string">
                                       <field name="line_ids"/>
                                   
+                                </page>
+                                <page name="propreties" string="Propreties">
+                                          <field name="state"/>
+                                          <field name="sold"/>
                                 </page>
                               </notebook>
                     

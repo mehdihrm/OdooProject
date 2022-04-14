@@ -8,12 +8,14 @@ class society(models.Model):
     _description = 'f_society products sells'
     _order = "id desc"
 
+    name = fields.Char()
     state = fields.Boolean("state",default=True,readonly=True)
     product_id = fields.Many2one("society.product",string="Product Name")
     product_price = fields.Float("Price")
     client_buyer = fields.Many2one("res.partner",string="Buyer")
     product_quantity = fields.Integer('Quantity')
     delivery_date = fields.Date('Expected delivery date :',compute="_get_del_date",inverse="_inverse_get_del_date")
+    sold = fields.Boolean(default=False)
 
     total = fields.Float("Total Price",compute="_get_total_price")
     line_ids = fields.One2many("product.sell.line", "model_id")
@@ -73,6 +75,14 @@ class society(models.Model):
             if record.state == True:
                     raise ValidationError("The record must be cancled before deleting it")
         return super(society,self).unlink()
+
+    def confirm_sell(self):
+        for record in self:
+            if record.state == False:
+                raise ValidationError("The record must be active before confirming the sale")
+            else:
+                record.sold = True
+        return True
 
 
 
