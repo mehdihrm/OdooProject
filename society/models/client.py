@@ -1,5 +1,7 @@
+from asyncio.windows_events import NULL
 from attr import field
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 
@@ -13,3 +15,6 @@ class society(models.Model):
     phone_number = fields.Char('Phone Number')
     adress = fields.Text('Adress',required=True)
     active = fields.Boolean('Active',default=False)
+
+
+

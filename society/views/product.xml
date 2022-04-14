@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <data>
     
  <!-- product action-->
      <record model="ir.actions.act_window" id="society.action_window3">
       <field name="name">Society Product Managing</field>
       <field name="res_model">society.product</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+     <!-- product selling action action-->
+     <record model="ir.actions.act_window" id="society.action_window6">
+      <field name="name">Society Product Selling</field>
+      <field name="res_model">society.product.sell</field>
       <field name="view_mode">tree,form</field>
     </record>
     
@@ -24,7 +29,19 @@
       </field>
     </record>
     
-    </data>
+    <!-- product list view display-->
+    <record model="ir.ui.view" id="society.list_product_sell">
+      <field name="name">society sells list</field>
+      <field name="model">society.product.sell</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="product_id"/>
+          <field name="client_buyer"/>
+          
+        </tree>
+      </field>
+    </record>
+    
 
     <!-- Product Search -->
 
@@ -56,14 +73,17 @@
       <field name="model">society.product</field>
       <field name="arch" type="xml">
         <form string="Products List">
+        <header>
+          
+          <field name="tag" widget="many2many_tags" options="{'color_field' : 'color','no_create_edit': True}"/>
+                
+        </header>
             <sheet>
                     <group>
                         <group>
                             <field name="name"/>
                         </group>
-                        <group>
-                            <field name="tag" widget="many2many_tags"/>
-                        </group>
+                        
                         <group>
                             <field name="category"/>
                         </group> 
@@ -78,13 +98,61 @@
                         </group>                                       
                     </group>
     </sheet>
+    <footer>
+          <button type="action" name="%(society.action_window6)d" string="My Action"/>    
+    </footer>
         </form>
+      </field>
+    </record>
+
+     <!-- form view product sell-->
+    <record id="society_product_sell_view_form" model="ir.ui.view">
+      <field name="name">society.product.sell.view.form</field>
+      <field name="model">society.product.sell</field>
+      <field name="arch" type="xml">
+        <form string="Products List">
+            <header>
+        <button name="cancel_deal" type="object" string="Cancel" attrs="{'invisible': [('state', '=', False)]}" />
+        <button name="activate_deal" type="object" string="Activate" attrs="{'invisible': [('state', '=', True)]}"/>
+        <field name="state"/>
+
+        </header>
+            <sheet>
+                    <group>
+                              <group>
+                                  <field name="product_id"/>
+                                  <field name="client_buyer"/>
+                                  <field name="product_quantity"/>
+                                  <field name="product_price"/>
+                                  <field name="total"/>
+                                  <field name="delivery_date"/>
+
+                              </group>
+                    </group>
+                              <notebook>
+                                <page name="Test" string="string">
+                                      <field name="line_ids"/>
+                                  
+                                </page>
+                              </notebook>
+                    
+
+            </sheet>
+        </form>
+        
       </field>
     </record>
 
     <menuitem id="society_first_level_menu3" name="Product" parent="society.menu_root">
             <menuitem id="society_product_menu_action" action="society.action_window3"/>
+            
+
+        </menuitem>
+         <menuitem id="society_first_level_menu_sells" name="Sells" parent="society.menu_root">
+            
+            <menuitem id="society_product_sell_menu_action" action="society.action_window6"/>
+
         </menuitem>
     
-
+</data>
 </odoo>
