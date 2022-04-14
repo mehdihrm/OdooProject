@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="to_understand_inheritance.list">
+      <field name="name">to_understand_inheritance list</field>
+      <field name="model">to_understand_inheritance.to_understand_inheritance</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="to_understand_inheritance.action_window">
+      <field name="name">to_understand_inheritance window</field>
+      <field name="res_model">to_understand_inheritance.to_understand_inheritance</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="to_understand_inheritance.action_server">
+      <field name="name">to_understand_inheritance server</field>
+      <field name="model_id" ref="model_to_understand_inheritance_to_understand_inheritance"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="to_understand_inheritance" id="to_understand_inheritance.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="to_understand_inheritance.menu_1" parent="to_understand_inheritance.menu_root"/>
+    <menuitem name="Menu 2" id="to_understand_inheritance.menu_2" parent="to_understand_inheritance.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="to_understand_inheritance.menu_1_list" parent="to_understand_inheritance.menu_1"
+              action="to_understand_inheritance.action_window"/>
+    <menuitem name="Server to list" id="to_understand_inheritance" parent="to_understand_inheritance.menu_2"
+              action="to_understand_inheritance.action_server"/>
+-->
+  </data>
+</odoo>

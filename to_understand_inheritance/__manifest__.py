@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "gstrdv",
+    'name': "to_understand_inheritance",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -25,9 +25,8 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'views/partial_class_partner_view.xml.xml',
         'views/views.xml',
-        'views/partial_class_partner_view.xml',
-        'data/sequenceCodes.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
