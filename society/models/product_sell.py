@@ -68,6 +68,13 @@ class society(models.Model):
         for record in self:
             new_date = record.delivery_date
 
+    def unlink(self):
+        for record in self:
+            if record.state == True:
+                    raise ValidationError("The record must be cancled before deleting it")
+        return super(society,self).unlink()
+
+
 
 class ProductSellLine(models.Model):
     _name="product.sell.line"

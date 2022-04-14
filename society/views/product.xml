@@ -98,6 +98,9 @@
                         </group>                                       
                     </group>
     </sheet>
+    <footer>
+          <button type="action" name="%(society.action_window6)d" string="My Action"/>    
+    </footer>
         </form>
       </field>
     </record>

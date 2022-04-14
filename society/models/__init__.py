@@ -6,4 +6,4 @@ from . import employee
 from . import product_tag
 from . import product 
 from . import product_sell
-#from . import customer
+from . import res_users
