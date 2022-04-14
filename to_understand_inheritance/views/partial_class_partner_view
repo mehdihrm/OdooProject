@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherited_model_view_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- find field description and add the field
+                     new_field after it -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="New Page">
+                        <group>
+                            <field name="desc_Text"/>
+                            <field name="candy_fld"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act.window" id="contact_list_action">
+            <field name="name">Contacts</field>
+            <field name="res.model">res.partner</field>
+            <field name="view">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
