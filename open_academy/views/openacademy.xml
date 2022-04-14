@@ -1,77 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--view form -->
+    <!--course-->
+    <!--view form -->
     <record model="ir.ui.view" id="course_form_view" >
-      <field name="name">course.form</field>
-      <field name="model">open_academy.course</field>
-      <field name="arch" type="xml">
-          <form string="course Form">
-              <separator string="General" colspan="2" />
-                  <notebook>
-                      <page string="page1">
-                        <!-- <separator string="General" colspan="2" />-->
-                          <h1>fORM View </h1>
-                           <h5><field name="name"/></h5>
-                           <field name="description"/>
-                           <field name="year"/>
-                      </page>
-                      <page string ="page2">
-                          This is my example of notrbooks
-                      </page>
-                  </notebook>
-          </form>
-      </field>
-    </record>
-    <!--view terr -->
-    <record model="ir.ui.view" id="course_tree_view" >
-      <field name="name">course.tree</field>
-      <field name="model">open_academy.course</field>
-      <field name="arch" type="xml">
-          <tree string="course tree">
-              <field name="name"/>
-              <field name="description"/>
-              <field name="year"/>
-          </tree>
-      </field>
-    </record>
+        <field name="name">course.form</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <form string="course Form">
+                <sheet>
+                    <group>
+                            <field name="name"/>
+                            <field name="responsible_id"/>
+                    </group>
+                    <notebook>
+                        <page string="page1">
+                            <field name="description"/>
+                            <field name="year"/>
+                        </page>
+                        <page string ="session">
+                            <field name="session_ids">
+                                <tree string ="Registered sessions">
+                                    <field name="name"/>
+                                    <field name="instructor_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+        </record>
+        <!--view terr-->
+        <record model="ir.ui.view" id="course_tree_view" >
+        <field name="name">course.tree</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <tree string="course tree">
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+                    <field name="description"/>
+                    <field name="year"/>
+            </tree>
+        </field>
+        </record>
+        <!--view search-->
+        <record model="ir.ui.view" id="course_seach_view">
+        <field name="name">course.search</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <search string="course search">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="year"/>
+            </search>
+        </field>
+        </record>
 
-    <!--view search-->
+        <!--Sission-->
+    <record model="ir.ui.view" id="session_form_view" >
+        <field name="name">session.form</field>
+        <field name="model">openacademy_sessions</field>
+        <field name="arch" type="xml">
+            <form string="session Form">
+                    <sheet>
+                        <group string="General">
+                            <field name="course_id"/>
+                            <field name="name"/>
+                            <field name="instructor_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Schedule">
+                            <field name="startDate"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                            <field name="taken_seats" widget="progressbar"/>
+                        </group>
+                        <button name="test_1"
+                        string="confirm"
+                        type='object'
+                        />
+                        <group>
+                            <label for="attendee_ids"/>
+                            <field name="attendee_ids"/>
+                        </group>
 
-    <record model="ir.ui.view" id="course_seach_view">
-      <field name="name">course.search</field>
-      <field name="model">open_academy.course</field>
-      <field name="arch" type="xml">
-          <search string="course search">
-              <field name="name"/>
-              <field name="description"/>
-              <field name="year"/>
-          </search>
-      </field>
-    </record>
-
-    ======================================================
-    <!--this is action  course_list -->
-   <!-- <record model="ir.actions.act.window" id="course_list">
+                    </sheet>
+            </form>
+        </field>
+        </record>
+    <!--tree session-->
+        <record model="ir.ui.view" id="session_tree_view" >
+        <field name="name">session.tree</field>
+        <field name="model">openacademy_sessions</field>
+        <field name="arch" type="xml">
+            <tree string="tree tree">
+                    <field name="name"/>
+                    <field name="course_id"/>
+                    <field name="taken_seats" widget="progressbar"/>
+            
+            </tree>
+        </field>
+        </record>
+    <!--======================== actions ==============================-->
+        <!--Course-->
+        <record model="ir.actions.act_window" id="course_list">
         <field name="name">Curses</field>
         <field name="res_model">open_academy.course</field>
         <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                create the first course
-            </p>
-        </field>
-    </record>-->
-    <record model="ir.actions.act_window" id="course_list">
-    <field name="name">Curses</field>
-    <field name="res_model">open_academy.course</field>
-    <field name="view_mode">tree,form</field>
-   </record>
+    </record>
+            <!--Action_sessions-->
+        <record model="ir.actions.act_window" id="session_list">
+        <field name="name">session</field>
+        <field name="res_model">openacademy_sessions</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-    <!-- my menu  (open ACademy =>open Academy2 =>Courses) -->
+        <!-- my menu  (open ACademy =>open Academy2 =>Courses) -->
+        <menuitem id="main_openacademy_menu" name="open Academy"/>
+        <menuitem id="openacademy_menu" name="open Academy2" parent="main_openacademy_menu"/>
+    <menuitem id="courses_menu" name="Courses" parent="openacademy_menu" action="course_list"/>
 
-    <menuitem id="main_openacademy_menu" name="open Academy"/>
+    <!--Menu (open ACademy =>open Academy2 =>session) -->
 
-    <menuitem id="openacademy_menu" name="open Academy2" parent="main_openacademy_menu"/>
-
-   <menuitem id="courses_menu" name="Courses" parent="openacademy_menu" action="course_list"/>
-</odoo>
+    <menuitem id="session_menu" name="session" parent="openacademy_menu" action="session_list"/>
+    </odoo>
