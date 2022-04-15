@@ -25,6 +25,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'views/views.xml',
         'views/templates.xml',
         'views/employee.xml',
@@ -32,7 +33,7 @@
         'views/product.xml',
         'views/product_tag.xml',
         'views/user_view.xml',
-        'views/account_view.xml'
+        'views/account_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
