@@ -21,6 +21,7 @@ class SocietyProduct(models.Model):
             self.env["account.move"].create(
                 {
                     "partner_id": prop.client_buyer,
+                    "client_id": prop.client_buyer_id,
                     "move_type": "out_invoice",
                     "journal_id": journal.id,
                     "invoice_line_ids": [

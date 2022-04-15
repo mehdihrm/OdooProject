@@ -13,6 +13,7 @@ class society(models.Model):
     product_id = fields.Many2one("society.product",string="Product Name")
     product_price = fields.Float("Price")
     client_buyer = fields.Many2one("res.partner",string="Buyer")
+    client_buyer_id = fields.Many2one("society.client",string="Buyer ID")
     product_quantity = fields.Integer('Quantity')
     delivery_date = fields.Date('Expected delivery date :',compute="_get_del_date",inverse="_inverse_get_del_date")
     sold = fields.Boolean(default=False)
