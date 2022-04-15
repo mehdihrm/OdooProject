@@ -23,8 +23,7 @@
     'depends': ['base','web','account'],
 
     # always loaded
-    'data': [
-        'security/ir.model.access.csv',
+    'data': [   
         'security/security.xml',
         'views/views.xml',
         'views/templates.xml',
@@ -34,6 +33,7 @@
         'views/product_tag.xml',
         'views/user_view.xml',
         'views/account_view.xml',
+        'security/ir.model.access.csv',
     ],
     # only loaded in demonstration mode
     'demo': [
