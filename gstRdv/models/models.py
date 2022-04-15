@@ -58,6 +58,7 @@ class specialite(models.Model):
 class patient(models.Model):
     _name = "gstrdv.patient"
     _description = "this model describes each caracter a Patient can have"
+    # _inherits = {'res.partner' : 'codePatient'}
     _rec_name = "codePatient"
     # fields related to this class
     codePatient = fields.Char(string="Code Patient", required=True, readonly=True, index=True,
@@ -96,6 +97,9 @@ class rdvs(models.Model):
             vals['codeRdv'] = self.env['ir.sequence'].next_by_code('gstrdv.rdv.sequence') or _('New')
         result = super(rdvs, self).create(vals)
         return result
+
+    def generate_invoice(self):
+        pass
 
     def _compute_time(self):
         timelocal = time.localtime()
@@ -145,6 +149,8 @@ class symptomes(models.Model):
 
         result = super(symptomes, self).create(vals)
         return result
+
+
 
 
 

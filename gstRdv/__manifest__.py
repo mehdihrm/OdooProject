@@ -28,7 +28,6 @@
         'views/views.xml',
         'views/res_users.xml',
         'views/res_partner.xml',
-
         'data/sequenceCodes.xml',
         'views/templates.xml',
     ],

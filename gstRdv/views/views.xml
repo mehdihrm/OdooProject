@@ -21,6 +21,17 @@
             <field name="model">gstrdv.medecin</field>
             <field name="arch" type="xml">
                 <form>
+                    <!--<header>
+                        &lt;!&ndash;<kanban>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="oe_kanban_global_click">
+                                        <field name="NomMedecin"/>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>&ndash;&gt;
+                    </header>-->
                     <sheet>
                         <div class="oe_title">
                             <h1>
@@ -110,7 +121,7 @@
             </field>
         </record>
         <!--    info Form with form-->
-        <record model="ir.ui.view" id="specialiteForm">
+        <record model="ir.ui.view" id="specialiteform">
             <field name="name">form.specialite</field>
             <field name="model">gstrdv.specialite</field>
             <field name="arch" type="xml">
@@ -129,6 +140,7 @@
                 </form>
             </field>
         </record>
+
 
         <!--    info Display with tree View-->
         <record model="ir.ui.view" id="display_rdvs">
@@ -154,6 +166,9 @@
                         <div class="oe_title">
                             <h1>
                                 <field name="codeRdv" readonly="1"/>
+                                <button type="object" name="generate_invoice"
+                                        string="Generate Invoice"/>
+
                             </h1>
                         </div>
                         <group>
@@ -225,7 +240,7 @@
                         <div class="oe_title">
                             <h1>
                                 <field name="codeSymptome" readonly="1"/>
-                                <button type="action" name="%(med_lst)d" string="go To Meds"/>
+                                <!--<button type="action" name="%(med_lst)d" string="go To Meds"/>-->
                             </h1>
                         </div>
                         <group>
@@ -237,8 +252,6 @@
                 </form>
             </field>
         </record>
-
-
 
 
         <!-- actions -->
