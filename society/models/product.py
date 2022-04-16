@@ -14,9 +14,8 @@ class society(models.Model):
     seller_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
     _sql_constraints = [
         ('check_price', 'CHECK(price > 0)',
-         'The product quantity must be superior to 0')
+        'The product quantity must be superior to 0')
     ]
-
-
+    
 def getPrice(self):
     return self.price
