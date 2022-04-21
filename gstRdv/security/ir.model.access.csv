@@ -5,3 +5,4 @@ SpecialiteUser,SpecialiteUser,model_gstrdv_specialite,base.group_user,1,1,1,1
 RdvsUser,RdvsUser,model_gstrdv_rdvs,base.group_user,1,1,1,1
 MaladieUser,MaladieUser,model_gstrdv_maladie,base.group_user,1,1,1,1
 SymptomesUser,SymptomesUser,model_gstrdv_symptomes,base.group_user,1,1,1,1
+Access_activity_example,activity.example,model_activity_example,base.group_user,1,1,1,1

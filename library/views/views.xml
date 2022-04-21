@@ -90,7 +90,7 @@
         </record>
 
         <!-- actions opening views on models -->
-        <record model="ir.actions.act_window" id="library_livre.action_window">
+        <record model="ir.actions.act_window" id="library_livre_action_window">
             <field name="name">library_livre_act</field>
             <field name="res_model">library.livre</field>
             <field name="view_mode">tree,form</field>
@@ -103,7 +103,7 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="library_theme.action_window">
+        <record model="ir.actions.act_window" id="library_theme_action_window">
             <field name="name">library_theme_act</field>
             <field name="res_model">library.theme</field>
             <field name="view_mode">tree,form</field>
@@ -119,8 +119,8 @@
         <!-- Top menu item -->
         <menuitem name="library" id="library.menu_root"/>
         <!-- menu categories -->
-        <menuitem name="Livre" id="library_livre_menu" parent="library.menu_root"/>
-        <menuitem name="Theme" id="library_theme_menu" parent="library.menu_root"/>
+        <menuitem name="Livre" id="library_livre_menu" parent="library.menu_root" action="library_livre_action_window"/>
+        <menuitem name="Theme" id="library_theme_menu" parent="library.menu_root" action="library_theme_action_window"/>
         <!-- actions -->
         <!--
             <menuitem name="List" id="library.menu_1_list" parent="library.menu_1"

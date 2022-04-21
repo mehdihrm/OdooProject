@@ -6,13 +6,14 @@
             <field name="name">view.display_med</field>
             <field name="model">gstrdv.medecin</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree decoration-success="AnneeActive >= 20" editable="top" decoration-danger="AnneeActive&lt;10">
                     <field name="codeMedecin"/>
                     <field name="NomMedecin"/>
                     <field name="PrenomMedecin"/>
                     <field name="TelMedecin"/>
-                    <field name="DateEmbauche"/>
+                    <field name="DateEmbauche" widget="date"/>
                     <field name="Specialite"/>
+                    <field name="AnneeActive"/>
                 </tree>
             </field>
         </record>
@@ -21,17 +22,6 @@
             <field name="model">gstrdv.medecin</field>
             <field name="arch" type="xml">
                 <form>
-                    <!--<header>
-                        &lt;!&ndash;<kanban>
-                            <templates>
-                                <t t-name="kanban-box">
-                                    <div class="oe_kanban_global_click">
-                                        <field name="NomMedecin"/>
-                                    </div>
-                                </t>
-                            </templates>
-                        </kanban>&ndash;&gt;
-                    </header>-->
                     <sheet>
                         <div class="oe_title">
                             <h1>
@@ -47,9 +37,9 @@
                             </group>
                             <group>
                                 <separator string="Job Infos"/>
-                                <field name="DateEmbauche"/>
+                                <field name="DateEmbauche" widget="date"/>
                                 <field name="Specialite"/>
-
+                                <field name="AnneeActive"/>
                             </group>
                             <notebook>
                                 <page string="My Rdvs">
@@ -74,6 +64,7 @@
                     <field name="adressePatient"/>
                     <field name="dateNaissance"/>
                     <field name="sexePatient"/>
+                    <field name="my_rdv_count" widget="progressbar"/>
                 </tree>
             </field>
         </record>
@@ -97,6 +88,8 @@
                                 <field name="adressePatient"/>
                                 <field name="dateNaissance"/>
                                 <field name="sexePatient"/>
+                                <field name="my_rdv_count" widget="progressbar"/>
+
                             </group>
                             <notebook>
                                 <page string="My Rdvs">
@@ -153,7 +146,69 @@
                     <field name="codePatient"/>
                     <field name="dateRdv"/>
                     <field name="heureRdv" widget="float_time"/>
+
                 </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="display_medecin">
+            <field name="name">view.display_medecin_graph</field>
+            <field name="model">gstrdv.medecin</field>
+            <field name="arch" type="xml">
+                <graph string="rdvs by codeMedecin" type="pie">
+                    <field name="codeMedecin"/>
+                    <field name="myRdvs_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="display_medecin">
+            <field name="name">view.display_medecin_pivot</field>
+            <field name="model">gstrdv.medecin</field>
+            <field name="arch" type="xml">
+                <pivot string="rdvs by codeMedecin">
+                    <field name="codeMedecin" type="col"/>
+                    <field name="myRdvs_count" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="display_rdvs_filter_search">
+            <field name="name">view.display_rdvs_filter_search</field>
+            <field name="model">gstrdv.rdvs</field>
+            <field name="arch" type="xml">
+                <search string="Ideas or suggestions">
+                    <field name="codeRdv"/>
+                    <field name="codeMedecin" widget="selection"/>
+                    <field name="codePatient" widget="selection"/>
+                    <field name="dateRdv"/>
+                    <field name="heureRdv" widget="float_time"/>
+
+                    <!--<filter name="my_researches" string="My Ideas"
+                            domain="[('heureRdv', '=', self)]"/>-->
+
+                    <group string="Group by">
+                        <filter name="group_by_medecin" string="Medecin"
+                                context="{'group_by' : 'codeMedecin'}"/>
+                        <filter name="group_by_patient" string="patient"
+                                context="{'group_by' : 'codePatient'}"/>
+                    </group>
+
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="display_rdvs_calendar">
+            <field name="name">view.display_rdvs_calendar</field>
+            <field name="model">gstrdv.rdvs</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar des RDV" date_start="dateRdv" color="codeMedecin">
+                    <field name="codeRdv"/>
+                    <field name="codeMedecin"/>
+                    <field name="codePatient"/>
+                    <field name="dateRdv"/>
+                    <field name="heureRdv" widget="float_time"/>
+
+                </calendar>
             </field>
         </record>
         <!--    info Form with form-->
@@ -240,7 +295,6 @@
                         <div class="oe_title">
                             <h1>
                                 <field name="codeSymptome" readonly="1"/>
-                                <!--<button type="action" name="%(med_lst)d" string="go To Meds"/>-->
                             </h1>
                         </div>
                         <group>
@@ -253,12 +307,129 @@
             </field>
         </record>
 
+        <!--        tree display-->
+        <record id="view_activity_example_tree" model="ir.ui.view">
+            <field name="name">activity.example.tree</field>
+            <field name="model">activity.example</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <tree string="Overtime records">
+                    <field name="nom"/>
+                    <field name="prenom"/>
+                    <field name="picture"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="on_change_example_tree" model="ir.ui.view">
+            <field name="name">on_change_example</field>
+            <field name="model">on_change_example</field>
+            <field name="arch" type="xml">
+                <tree string="OnChangeExample">
+                    <field name="price_unit"/>
+                    <field name="amont"/>
+                    <field name="price"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="onchange_Example">
+            <field name="name">form.onchange_example</field>
+            <field name="model">on_change_example</field>
+            <field name="arch" type="xml">
+                <form string="onChangeExample">
+                    <sheet>
+                        <group>
+                            <separator string="Essential Infos"/>
+                            <field name="price_unit"/>
+                            <field name="amont"/>
+                            <field name="price"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        form for activity-->
+
+        <record id="view_activity_example_form" model="ir.ui.view">
+            <field name="name">activity.example.form</field>
+            <field name="model">activity.example</field>
+            <field name="arch" type="xml">
+                <form string="Study roadmap record">
+                    <sheet>
+                        <group>
+                            <field name="nom"/>
+                            <field name="prenom"/>
+                            <field name="picture"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Activity -->
+        <record id="view_activity_example" model="ir.ui.view">
+            <field name="name">example.activity</field>
+            <field name="model">activity.example</field>
+            <field name="arch" type="xml">
+                <activity string="Applicants">
+                    <templates>
+                        <div t-name="activity-box">
+                            <div>
+                                <field name="nom"/>
+                                <field name="prenom"/>
+                            </div>
+                            <div>
+                                <field name="picture" widget='image'/>
+                            </div>
+                        </div>
+                    </templates>
+                </activity>
+            </field>
+        </record>
+
+        <record id="rdv_kanban" model="ir.ui.view">
+            <field name="name">rdv_kanban_per_medecin</field>
+            <field name="model">gstrdv.rdvs</field>
+            <field name="arch" type="xml">
+                <kanban string="RDV per Medecin" default_group_by="codeMedecin">
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="codeRdv"/>
+                                </strong>
+                                <div t-if="record.codeMedecin">
+                                    <t t-esc="record.codeMedecin"/>
+                                </div>
+                                <!--<div t-if="record.codePatient.value">
+                                    <t t-esc="record.codePatient.value"/>
+                                </div>
+                                <div t-if="record.dateRdv.value">
+                                    <t t-esc="record.dateRdv.value"/>
+                                </div>
+                                <div t-if="record.heureRdv.value">
+                                    <t t-esc="record.heureRdv.value"/>
+                                </div>-->
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
         <!-- actions -->
         <record model="ir.actions.act_window" id="med_lst">
             <field name="name">Medecin</field>
             <field name="res_model">gstrdv.medecin</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
             <field name="help" type="html">
                 <img src='./../pictures/medical_doctor_100px.png' width="100" height="100"/>
                 <p>
@@ -299,7 +470,7 @@
         <record model="ir.actions.act_window" id="rdvs_lst">
             <field name="name">Rdvs</field>
             <field name="res_model">gstrdv.rdvs</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar,search,kanban</field>
             <field name="help" type="html">
                 <img src="./../pictures/pay_date_100px.png" width="100" height="100"/>
                 <p>
@@ -338,6 +509,25 @@
             </field>
         </record>
 
+
+        <record id="action_activity_example" model="ir.actions.act_window">
+            <field name="name">Activity View</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">activity.example</field>
+            <field name="view_mode">activity,tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="onchange_example">
+            <field name="name">OnchangeExample</field>
+            <field name="res_model">on_change_example</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    :)
+                </p>
+            </field>
+        </record>
+
         <!-- Top menu item -->
         <menuitem name="Gestion Des RDVs" id="gstrdv_menu_root">
             <!-- menu categories -->
@@ -347,6 +537,8 @@
             <menuitem name="RDVs" id="gstrdv_rdvs_action" action="rdvs_lst"/>
             <menuitem name="Maladie" id="gstrdv_maladie_action" action="maladie_lst"/>
             <menuitem name="Symptomes" id="gstrdv_symptomes_action" action="symptomes_lst"/>
+            <menuitem name="Activity view" id="activity_example_root" action="action_activity_example" sequence="10"/>
+            <menuitem name="On Change Example" id="onchange_example_root" action="onchange_example"/>
         </menuitem>
 
     </data>

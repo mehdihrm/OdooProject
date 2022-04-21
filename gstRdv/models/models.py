@@ -2,7 +2,9 @@
 from email.policy import default
 
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 import time
+import datetime
 
 
 # Medecin_Class
@@ -18,8 +20,10 @@ class medecin(models.Model):
     PrenomMedecin = fields.Char(string="Prenom Medecin")
     TelMedecin = fields.Char(string="Tele de Medecin")
     DateEmbauche = fields.Date(string="Date d'Embauche")
+    AnneeActive = fields.Integer(string="Annee Active", compute='_calculer_an_active', readonly=True)
     Specialite = fields.Many2one("gstrdv.specialite", ondelete="set null", string="specialite")
     myRdvs = fields.One2many("gstrdv.rdvs", "codeMedecin", string="My Rdvs")
+    myRdvs_count=fields.Integer(string="CommeBien des RDV ai-je?!", compute='count_rdv_per_medecin', store=True)
 
     @api.model
     def create(self, vals):
@@ -27,6 +31,18 @@ class medecin(models.Model):
             vals['codeMedecin'] = self.env['ir.sequence'].next_by_code('gstrdv.medecin.sequence') or _('New')
         result = super(medecin, self).create(vals)
         return result
+
+    # @api.depends('DateEmbauche')
+    def _calculer_an_active(self):
+        for record in self:
+            if record.DateEmbauche:
+                year = datetime.datetime.strptime(str(record['DateEmbauche']), "%Y-%m-%d").strftime("%Y")
+                record.AnneeActive = datetime.datetime.now().year - int(year)
+
+    @api.depends('myRdvs')
+    def count_rdv_per_medecin(self):
+        for record in self:
+            record.myRdvs_count = len(record.myRdvs)
 
     # @api.onchange('NomMedecin')
     # def change(self):
@@ -69,6 +85,7 @@ class patient(models.Model):
     dateNaissance = fields.Date(string="Date de Naissance")
     sexePatient = fields.Selection(selection=[('f', 'Femme'), ('m', 'Homme')])
     myRdvs = fields.One2many("gstrdv.rdvs", "codePatient", string="My Rdvs")
+    my_rdv_count = fields.Float(string="commebien des rdv j'assiste?!", compute="_pers_rdvs", inverse="_pers_rdvs_inverse")
 
     @api.model
     def create(self, vals):
@@ -76,6 +93,20 @@ class patient(models.Model):
             vals['codePatient'] = self.env['ir.sequence'].next_by_code('gstrdv.patient.sequence') or _('New')
         result = super(patient, self).create(vals)
         return result
+
+    @api.depends('myRdvs')
+    def _pers_rdvs(self):
+        for record in self:
+            if record.myRdvs:
+                record.my_rdv_count = 100.0 * len(record.myRdvs) / 50
+            else:
+                record.my_rdv_count = 0.00
+
+    @api.depends('myRdvs')
+    def _pers_rdvs_inverse(self):
+        for record in self:
+            if record.myRdvs:
+                record.my_rdv_count = 50 * len(record.myRdvs) / 100.0
 
 
 # class RDV
@@ -87,8 +118,8 @@ class rdvs(models.Model):
     codeRdv = fields.Char(string="RDV", required=True, readonly=True, index=True, default=lambda self: _('New'),
                           help="this is the code that make each RDV unique")
     codeMedecin = fields.Many2one("gstrdv.medecin", ondelete="set null", string="Medecin")
-    codePatient = fields.Many2one("gstrdv.patient", ondelete="set null", string="Patient")
-    dateRdv = fields.Date(string="Date de RDV", required=True)
+    codePatient = fields.Many2one("gstrdv.patient", ondelete="set null", string="Patient", default=lambda self:self.env.user )
+    dateRdv = fields.Date(string="Date de RDV", required=True, default=datetime.datetime.now())
     heureRdv = fields.Float(string='Heure de RDV', compute="_compute_time", required=True)
 
     @api.model
@@ -100,6 +131,7 @@ class rdvs(models.Model):
 
     def generate_invoice(self):
         pass
+
 
     def _compute_time(self):
         timelocal = time.localtime()
@@ -151,14 +183,44 @@ class symptomes(models.Model):
         return result
 
 
+# trying activities
+class ActivityViewExample(models.Model):
+    _name = 'activity.example'
+    _inherit = ['mail.thread', 'mail.activity.mixin'] # this step is necessary
+    _description = 'Add Activity view'
+
+    nom = fields.Char(string="Nom :")
+    prenom = fields.Char(string="Prenom :")
+    picture = fields.Binary(string="Picture :")
 
 
+class onChangeExample(models.Model):
+    _name = 'on_change_example'
+    _description = 'Add on change example'
 
+    price_unit = fields.Float(string="Price Unit :")
+    amont = fields.Integer(string="Amont :", default=1)
+    price = fields.Float(string="Price :", compute="_calculate_price", readonly="1")
 
-
-# @api.constrains('nomSymptomes')
-# def chack_to_validate(self):
-#     print(len(self))
+    @api.onchange('amont', 'price_unit')
+    def _calculate_price(self):
+        self.price = self.price_unit * self.amont
+        return {
+            'warning' : {
+                'title' : "Something bad happened",
+                'message' : "it was very bad indeed",
+            }
+        }
+    @api.constrains('price_unit')
+    def _chack_to_validate(self):
+        for record in self:
+            if record.price_unit < 0 :
+                return {
+                    'warning': {
+                        'title': "Something bad happened",
+                        'message': "the price cannot be signed number",
+                    }
+                }
 
 # self is a set of records that are in use currrently
 
