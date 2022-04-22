@@ -406,18 +406,18 @@
                                 <strong class="o_kanban_record_title">
                                     <field name="codeRdv"/>
                                 </strong>
-                                <div t-if="record.codeMedecin">
-                                    <t t-esc="record.codeMedecin"/>
+                                <div t-if="record.codeMedecin.value">
+                                    <field name="codeMedecin"/>
                                 </div>
-                                <!--<div t-if="record.codePatient.value">
-                                    <t t-esc="record.codePatient.value"/>
+                                <div t-if="record.codePatient.value">
+                                    <field name="codePatient"/>
                                 </div>
                                 <div t-if="record.dateRdv.value">
-                                    <t t-esc="record.dateRdv.value"/>
+                                    <field name="dateRdv"/>
                                 </div>
                                 <div t-if="record.heureRdv.value">
-                                    <t t-esc="record.heureRdv.value"/>
-                                </div>-->
+                                    <field name="heureRdv"/>
+                                </div>
                             </div>
                         </t>
                     </templates>

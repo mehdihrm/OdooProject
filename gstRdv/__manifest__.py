@@ -29,6 +29,7 @@
         'views/res_users.xml',
         'views/res_partner.xml',
         'data/sequenceCodes.xml',
+        # 'views/wizard.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
