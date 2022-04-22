@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.sessions</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="user">
+                    <field name="user_ids"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_action">
+        <field name="name">account</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="contact_menu" name="account" parent="main_openacademy_menu" action="account_action"/>
+
+</odoo>

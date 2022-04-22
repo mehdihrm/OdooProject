@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+MedecinUser,MedecinUser,model_gstrdv_medecin,base.group_user,1,1,1,1
+PatientUser,PatientUser,model_gstrdv_patient,base.group_user,1,1,1,1
+SpecialiteUser,SpecialiteUser,model_gstrdv_specialite,base.group_user,1,1,1,1
+RdvsUser,RdvsUser,model_gstrdv_rdvs,base.group_user,1,1,1,1
+MaladieUser,MaladieUser,model_gstrdv_maladie,base.group_user,1,1,1,1
+SymptomesUser,SymptomesUser,model_gstrdv_symptomes,base.group_user,1,1,1,1

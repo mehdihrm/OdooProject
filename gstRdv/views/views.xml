@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--    info Display with tree View-->
+        <record model="ir.ui.view" id="display_medecin">
+            <field name="name">view.display_med</field>
+            <field name="model">gstrdv.medecin</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="codeMedecin"/>
+                    <field name="NomMedecin"/>
+                    <field name="PrenomMedecin"/>
+                    <field name="TelMedecin"/>
+                    <field name="DateEmbauche"/>
+                    <field name="Specialite"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="formMedecin">
+            <field name="name">view.medecinForm</field>
+            <field name="model">gstrdv.medecin</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="codeMedecin" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <separator string="Personal Infos"/>
+                                <field name="NomMedecin"/>
+                                <field name="PrenomMedecin"/>
+                                <field name="TelMedecin"/>
+                            </group>
+                            <group>
+                                <separator string="Job Infos"/>
+                                <field name="DateEmbauche"/>
+                                <field name="Specialite"/>
+
+                            </group>
+                            <notebook>
+                                <page string="My Rdvs">
+                                    <field name="myRdvs"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--    info Display with tree View-->
+        <record model="ir.ui.view" id="display_Patient">
+            <field name="name">view.display_pat</field>
+            <field name="model">gstrdv.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="codePatient"/>
+                    <field name="nomPatient"/>
+                    <field name="prenomPatient"/>
+                    <field name="adressePatient"/>
+                    <field name="dateNaissance"/>
+                    <field name="sexePatient"/>
+                </tree>
+            </field>
+        </record>
+        <!--    info Form with form-->
+        <record model="ir.ui.view" id="patientform">
+            <field name="name">form.patient</field>
+            <field name="model">gstrdv.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="codePatient" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <separator string="Personal Infos"/>
+                                <field name="nomPatient"/>
+                                <field name="prenomPatient"/>
+                                <field name="adressePatient"/>
+                                <field name="dateNaissance"/>
+                                <field name="sexePatient"/>
+                            </group>
+                            <notebook>
+                                <page string="My Rdvs">
+                                    <field name="myRdvs"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--    info Display with tree View-->
+        <record model="ir.ui.view" id="display_specialite">
+            <field name="name">view.display_specialite</field>
+            <field name="model">gstrdv.specialite</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="codeSpecialite"/>
+                    <field name="nomSpecialite"/>
+                </tree>
+            </field>
+        </record>
+        <!--    info Form with form-->
+        <record model="ir.ui.view" id="specialiteForm">
+            <field name="name">form.specialite</field>
+            <field name="model">gstrdv.specialite</field>
+            <field name="arch" type="xml">
+                <form string="Specialite">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="codeSpecialite" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <separator string="Essential Infos"/>
+                            <field name="nomSpecialite"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--    info Display with tree View-->
+        <record model="ir.ui.view" id="display_rdvs">
+            <field name="name">view.display_rdvs</field>
+            <field name="model">gstrdv.rdvs</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="codeRdv"/>
+                    <field name="codeMedecin"/>
+                    <field name="codePatient"/>
+                    <field name="dateRdv"/>
+                    <field name="heureRdv" widget="float_time"/>
+                </tree>
+            </field>
+        </record>
+        <!--    info Form with form-->
+        <record model="ir.ui.view" id="rdvsForm">
+            <field name="name">form.rdvs</field>
+            <field name="model">gstrdv.rdvs</field>
+            <field name="arch" type="xml">
+                <form string="RDV">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="codeRdv" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <separator string="Essential Infos"/>
+                            <field name="codeMedecin"/>
+                            <field name="codePatient"/>
+                            <field name="dateRdv"/>
+                            <field name="heureRdv" widget="float_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--    info Display with tree View-->
+        <record model="ir.ui.view" id="display_maladie">
+            <field name="name">view.display_maladie</field>
+            <field name="model">gstrdv.maladie</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="codeMaladie"/>
+                    <field name="nomMaladie"/>
+                    <field name="symptomes"/>
+                </tree>
+            </field>
+        </record>
+        <!--    info Form with form-->
+        <record model="ir.ui.view" id="maladieForm">
+            <field name="name">form.maladie</field>
+            <field name="model">gstrdv.maladie</field>
+            <field name="arch" type="xml">
+                <form string="Maladie">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="codeMaladie" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <separator string="Essential Infos"/>
+                            <field name="nomMaladie"/>
+                            <field name="symptomes"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--    info Display with tree View-->
+        <record model="ir.ui.view" id="display_symptomes">
+            <field name="name">view.display_symptomes</field>
+            <field name="model">gstrdv.symptomes</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="codeSymptome"/>
+                    <field name="nomSymptomes"/>
+                    <field name="maladieLst"/>
+                </tree>
+            </field>
+        </record>
+        <!--    info Form with form-->
+        <record model="ir.ui.view" id="symptomesForm">
+            <field name="name">form.symptomes</field>
+            <field name="model">gstrdv.symptomes</field>
+            <field name="arch" type="xml">
+                <form string="Symptomes">
+
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="codeSymptome" readonly="1"/>
+                                <button type="action" name="%(med_lst)d" string="go To Meds"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <separator string="Essential Infos"/>
+                            <field name="nomSymptomes"/>
+                            <field name="maladieLst"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+        <!-- actions -->
+        <record model="ir.actions.act_window" id="med_lst">
+            <field name="name">Medecin</field>
+            <field name="res_model">gstrdv.medecin</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <img src='./../pictures/medical_doctor_100px.png' width="100" height="100"/>
+                <p>
+                    We Still Have No Doctors.
+                    :)
+                </p>
+                <p>If You Like To Add New Doctor Click Create Button!!!</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="pat_lst">
+            <field name="name">Patient</field>
+            <field name="res_model">gstrdv.patient</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <img src="./../pictures/patient_care_50px.png" width="100" height="100"/>
+                <p>
+                    We Still Have No Patients. :)
+                </p>
+                <p>If You Like To Add New Patient Click Create Button!!!</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="sep_lst">
+            <field name="name">Specialite</field>
+            <field name="res_model">gstrdv.specialite</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <img src="./../pictures/devops_24px.png" width="100" height="100"/>
+                <p>
+                    We Still Have No Specialite.
+                    :)
+                </p>
+                <p>If You Like To Add New Specialite Click Create Button!!!</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="rdvs_lst">
+            <field name="name">Rdvs</field>
+            <field name="res_model">gstrdv.rdvs</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <img src="./../pictures/pay_date_100px.png" width="100" height="100"/>
+                <p>
+                    We Still Have No RDV.
+                    :)
+                </p>
+                <p>If You Like To Add New RDV Click Create Button!!!</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="maladie_lst">
+            <field name="name">Maladies</field>
+            <field name="res_model">gstrdv.maladie</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <img src="../pictures/pay_date_100px.png" width="100" height="100"/>
+                <p>
+                    We Still Have No Maladie.
+                    :)
+                </p>
+                <p>If You Like To Add New Maladie Click Create Button!!!</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="symptomes_lst">
+            <field name="name">Symptomes</field>
+            <field name="res_model">gstrdv.symptomes</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <img src="../pictures/shaking_50px.png" width="100" height="100"/>
+                <p>
+                    We Still Have No Symptomes.
+                    :)
+                </p>
+                <p>If You Like To Add New Symptomes Click Create Button!!!</p>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="Gestion Des RDVs" id="gstrdv_menu_root">
+            <!-- menu categories -->
+            <menuitem name="Medecins" id="gstrdv_medecin" action="med_lst"/>
+            <menuitem name="Patients" id="gstrdv_patient_action" action="pat_lst"/>
+            <menuitem name="Specialites" id="gstrdv_specialite_action" action="sep_lst"/>
+            <menuitem name="RDVs" id="gstrdv_rdvs_action" action="rdvs_lst"/>
+            <menuitem name="Maladie" id="gstrdv_maladie_action" action="maladie_lst"/>
+            <menuitem name="Symptomes" id="gstrdv_symptomes_action" action="symptomes_lst"/>
+        </menuitem>
+
+    </data>
+</odoo>
