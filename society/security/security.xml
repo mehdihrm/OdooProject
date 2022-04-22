@@ -1,53 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <record id="module_category_society" model="ir.module.category">
-            <field name="name">Society Management</field>
-            <field name="description">Category fo Society</field>
-            <field name="sequence">45</field>
-
-        </record>
 
 
+    <!-- Society Management Group-->
+    <record id="module_category_society" model="ir.module.category">
+        <field name="name">Society Management</field>
+        <field name="description">Category fo Society</field>
+        <field name="sequence">45</field>
 
+    </record>
+    <!-- END -->
+
+    <!-- Administrator : Have all rights-->
+    <record id="group_society_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_society" />
+        <!-- <field name="implied_ids" eval="[(ref('society.group_user')]"/> -->
+        <field name="comment">Administrator.</field>
+    </record>
+
+    <!--Employees Management-->
+
+
+    <!-- Employees Managaement Groups-->
+    <!-- Employees Manager : Can manage employees + Clients-->
     <record id="group_society_employee" model="res.groups">
         <field name="name">Employee's Manager</field>
-        <field name="category_id" ref="module_category_society"/>
+        <field name="category_id" ref="module_category_society" />
         <!-- <field name="implied_ids" eval="[(ref('society.group_user')]"/> -->
         <field name="comment">Society Manager.</field>
     </record>
+    <!-- END -->
 
-    <record id="group_society_product_seller" model="res.groups">
+    <!--Products Management-->
+
+
+    <!--Products Management Groups-->
+    <!--Products Manager : Can manage all products,sells,tags-->
+    <record id="group_society_product_manager" model="res.groups">
+        <field name="name">Society Products Manager</field>
+        <field name="category_id" ref="module_category_society" />
+        <field name="implied_ids" eval="[(4, ref('society.group_society_product_seller'))]" />
+        <field name="comment">Society Products Manager.</field>
+    </record>
+
+
+    <!--Products Salesman : can see his products but cannot alter them-->
+    <record id="group_society_salesman" model="res.groups">
         <field name="name">Society Salesman</field>
-        <field name="category_id" ref="module_category_society"/>
+        <field name="category_id" ref="module_category_society" />
         <!-- <field name="implied_ids" eval="[(ref('society.group_user')]"/> -->
         <field name="comment">Society Salesman.</field>
     </record>
 
-    <record id="group_society_product_manager" model="res.groups">
-        <field name="name">Society Products Manager</field>
-        <field name="category_id" ref="module_category_society"/>
-        <field name="implied_ids" eval="[(4, ref('society.group_society_product_seller'))]"/>
-        <field name="comment">Society Products Manager.</field>
+    <!--Products Seller: can sell products-->
+    <record id="group_society_product_seller" model="res.groups">
+        <field name="name">Society Product Seller</field>
+        <field name="category_id" ref="module_category_society" />
+        <!-- <field name="implied_ids" eval="[(ref('society.group_user')]"/> -->
+        <field name="comment">Society Product Seller.</field>
     </record>
 
+
+    <!--END-->
 
 
     <!-- Record Rule for products per salesman-->
     <record id="product_sales_record_rule" model="ir.rule">
         <field name="name">Sees only his products</field>
-        <field name="model_id" ref="model_society_product"/>
+        <field name="model_id" ref="model_society_product" />
         <field name="domain_force">[('seller_id','=',user.id)]</field>
-        <field name="groups" eval="[(4, ref('group_society_product_seller'))]" /> 
+        <field name="groups" eval="[(4, ref('group_society_product_seller'))]" />
     </record>
 
 
     <!--Record Rule for products manager-->
-    <record id="product_manager_record_rule" model="ir.rule">
+    <!-- <record id="product_manager_record_rule" model="ir.rule">
         <field name="name">Sees only his products</field>
         <field name="model_id" ref="model_society_product"/>
         <field name="groups" eval="[(4, ref('group_society_product_manager'))]" />
-    </record>
-
+    </record> -->
 
 
 </odoo>
