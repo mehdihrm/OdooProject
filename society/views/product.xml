@@ -1,198 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-    
- <!-- product action-->
-     <record model="ir.actions.act_window" id="society.action_window3">
+  <data>
+
+    <!-- product action-->
+    <record model="ir.actions.act_window" id="society.action_window3">
       <field name="name">Society Product Managing</field>
       <field name="res_model">society.product</field>
       <field name="view_mode">tree,kanban,form</field>
     </record>
-     <!-- product selling action action-->
-     <record model="ir.actions.act_window" id="society.action_window6">
+    <!-- product selling action action-->
+    <record model="ir.actions.act_window" id="society.action_window6">
       <field name="name">Society Product Selling</field>
       <field name="res_model">society.product.sell</field>
       <field name="view_mode">tree,form</field>
     </record>
-    
-        <!-- product list view display-->
+
+    <!-- product list view display-->
     <record model="ir.ui.view" id="society.list_product">
       <field name="name">society product list</field>
       <field name="model">society.product</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="category"/>
-          <field name="price"/>
-          <field name="seller_id"/>
+          <field name="name" />
+          <field name="category" />
+          <field name="price" />
+          <field name="seller_id" />
         </tree>
       </field>
     </record>
-    
+
     <!-- product list view display-->
     <record model="ir.ui.view" id="society.list_product_sell">
       <field name="name">society sells list</field>
       <field name="model">society.product.sell</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="product_id"/>
-          <field name="client_buyer"/>
-          
+          <field name="product_id" />
+          <field name="client_buyer" />
+
         </tree>
       </field>
     </record>
-    
+
 
     <!-- Product Search -->
 
-      <record id="society.product_view_search" model="ir.ui.view">
-            <field name="name">society.product.view.search</field>
-            <field name="model">society.product</field>
-            <field name="arch" type="xml">
-              <search string="Products">
-                <field name="name" string="Product Name"/>
-                <field name="category" string="Category"/>
-                <filter string="Active"
-                        name="active"
-                        domain="[('active','=','True')]"
-                        />
+    <record id="society.product_view_search" model="ir.ui.view">
+      <field name="name">society.product.view.search</field>
+      <field name="model">society.product</field>
+      <field name="arch" type="xml">
+        <search string="Products">
+          <field name="name" string="Product Name" />
+          <field name="category" string="Category" />
+          <filter string="Active" name="active" domain="[('active','=','True')]" />
 
 
-                <group expand="1" string="Group By">
-                  <filter string="Category" name="category"
-                  context="{'group_by':'category','residual_visible':True}"/>
-                </group>
-                  
-                    
-              </search>
-            </field>
-          </record>
- <!-- form view product-->
+          <group expand="1" string="Group By">
+            <filter string="Category" name="category" context="{'group_by':'category','residual_visible':True}" />
+          </group>
+
+
+        </search>
+      </field>
+    </record>
+    <!-- form view product-->
     <record id="society_product_view_form" model="ir.ui.view">
       <field name="name">society.product.view.form</field>
       <field name="model">society.product</field>
       <field name="arch" type="xml">
         <form string="Products List">
-        <header>
-          
-          <field name="tag" widget="many2many_tags" options="{'color_field' : 'color','no_create_edit': True}"/>
-                
-        </header>
-            <sheet>
-                    <group>
-                        <group>
-                            <field name="name"/>
-                        </group>
-                        
-                        <group>
-                            <field name="category"/>
-                        </group> 
-                        <group>
-                            <field name="price"/>
-                        </group> 
-                        <group>
-                            <field name="active"/>
-                        </group>     
-                        <group>
-                            <field name="seller_id"/>
-                        </group>                                       
-                    </group>
-    </sheet>
-    <footer>
-          <button type="action" name="%(society.action_window6)d" string="My Action"/>    
-    </footer>
+          <header>
+
+            <field name="tag" widget="many2many_tags" options="{'color_field' : 'color','no_create_edit': True}" />
+
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="name" />
+              </group>
+
+              <group>
+                <field name="category" />
+              </group>
+              <group>
+                <field name="price" />
+              </group>
+              <group>
+                <field name="active" />
+              </group>
+              <group>
+                <field name="seller_id" />
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button type="action" name="%(society.action_window6)d" string="My Action" />
+          </footer>
         </form>
       </field>
     </record>
 
     <!-- Knanban View-->
     <record id="estate_property_view_kanban" model="ir.ui.view">
-            <field name="name">society.product.kanban</field>
-            <field name="model">society.product</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="category" records_draggable="0">
-                  <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div>
-                                <strong class="o_kanban_record_title">
-                                    <field name="name"/>
-                                </strong>
-                            </div>
-                            <div>
-                                Price : <field name="price"/>
-                            </div>
-                            <!-- <div t-if="record.state.raw_value == 'offer_received'">
+      <field name="name">society.product.kanban</field>
+      <field name="model">society.product</field>
+      <field name="arch" type="xml">
+        <kanban default_group_by="category" records_draggable="0">
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click">
+                <div>
+                  <strong class="o_kanban_record_title">
+                    <field name="name" />
+                  </strong>
+                </div>
+                <div>
+                  Price :
+                  <field name="price" />
+                </div>
+                <!-- <div t-if="record.state.raw_value == 'offer_received'">
                                 Best Offer: <field name="best_price"/>
                             </div> -->
-                            <div>
-                                Salesman: <field name="seller_id"/>
-                            </div>
-                            <field name="tag" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
+                <div>
+                  Salesman:
+                  <field name="seller_id" />
+                </div>
+                <field name="tag" widget="many2many_tags" options="{'color_field': 'color'}" />
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
     </record>
 
 
-     <!-- form view product sell-->
+    <!-- form view product sell-->
     <record id="society_product_sell_view_form" model="ir.ui.view">
       <field name="name">society.product.sell.view.form</field>
       <field name="model">society.product.sell</field>
       <field name="arch" type="xml">
         <form string="Products List">
-            <header>
-        <button name="cancel_deal" type="object" string="Cancel" class="oe_highlight" attrs="{'invisibl
+          <header>
+            <button name="cancel_deal" type="object" string="Cancel" class="oe_highlight" attrs="{'invisibl
         e': [('state', '=', False)]}" />
-        <button name="activate_deal" type="object" string="Activate" class="oe_highlight" attrs="{'invisible': [('state', '=', True)]}"/>
-        <button name="confirm_sell" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible': [('sold', '=', True)]}"/>
+            <button name="activate_deal" type="object" string="Activate" class="oe_highlight" attrs="{'invisible': [('state', '=', True)]}" />
+            <button name="confirm_sell" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible': [('sold', '=', True)]}" />
 
-        <field name="state"/>
+            <field name="state" />
 
-        </header>
-            <sheet>
-                    <group>
-                              <group>
-                                  <field name="product_id"/>
-                                  <field name="client_buyer"/>
-                                  <field name="client_buyer_id"/>
-                                  <field name="product_quantity"/>
-                                  <field name="product_price"/>
-                                  <field name="total"/>
-                                  <field name="delivery_date"/>
-                                  
-                              </group>
-                    </group>
-                              <notebook>
-                                <page name="Test" string="string">
-                                      <field name="line_ids"/>
-                                  
-                                </page>
-                                <page name="propreties" string="Propreties">
-                                          <field name="state"/>
-                                          <field name="sold"/>
-                                </page>
-                              </notebook>
-                    
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="product_id" />
+                <field name="client_buyer" />
+                <field name="client_buyer_id" />
+                <field name="product_quantity" />
+                <field name="product_price" />
+                <field name="total" />
+                <field name="delivery_date" />
 
-            </sheet>
+              </group>
+            </group>
+            <notebook>
+              <page name="Test" string="string">
+                <field name="line_ids" />
+
+              </page>
+              <page name="propreties" string="Propreties">
+                <field name="state" />
+                <field name="sold" />
+              </page>
+            </notebook>
+
+
+          </sheet>
         </form>
-        
+
       </field>
     </record>
 
     <menuitem id="society_first_level_menu3" name="Product" parent="society.menu_root">
-            <menuitem id="society_product_menu_action" action="society.action_window3"/>
-            
+      <menuitem id="society_product_menu_action" action="society.action_window3" />
 
-        </menuitem>
-         <menuitem id="society_first_level_menu_sells" name="Sells" parent="society.menu_root">
-            
-            <menuitem id="society_product_sell_menu_action" action="society.action_window6"/>
 
-        </menuitem>
-    
-</data>
+    </menuitem>
+    <menuitem id="society_first_level_menu_sells" name="Sells" parent="society.menu_root">
+
+      <menuitem id="society_product_sell_menu_action" action="society.action_window6" />
+
+    </menuitem>
+
+  </data>
 </odoo>

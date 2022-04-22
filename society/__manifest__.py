@@ -20,10 +20,10 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','web','account'],
+    'depends': ['base', 'web', 'account'],
 
     # always loaded
-    'data': [   
+    'data': [
         'security/security.xml',
         'views/views.xml',
         'views/templates.xml',
@@ -39,5 +39,5 @@
     'demo': [
         'demo/demo.xml',
     ],
-    'application':True,
+    'application': True,
 }
