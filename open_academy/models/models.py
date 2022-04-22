@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from ast import Return, Store
+from dataclasses import Field
 from datetime import datetime, timedelta
 from email.policy import default
+from tabnanny import check
 from odoo import models, fields, api, exceptions
-
 
 class course (models.Model):
         _name = 'open_academy.course'
@@ -13,9 +14,16 @@ class course (models.Model):
         description = fields.Text()
         year = fields.Date()
         photo =fields.Binary()
+        check=fields.Boolean()
+        price=fields.Float(digts=(6,2))
+        
+        a=fields.Integer(string="all sessions" , compute="all_session")
+        b=fields.Integer(string="sessions valid",compute="all_session_valid")
+        c=fields.Integer(string="session not valid",compute="all_session_noValid")
+
         responsible_id = fields.Many2one('res.users', ondelete="set null", string='Responsible', index=True)
         session_ids = fields.One2many('openacademy_sessions', 'course_id', string='sisseon')
-        
+
         _sql_constraints = [
                 ('name_description_check',
                 'CHECK(name!=description)',
@@ -33,17 +41,38 @@ class course (models.Model):
                         vals["name_seq"]=self.env['ir.sequence'].next_by_code('test.course') or('New')
                         delta=super(course,self).create(vals)
                         return delta
-        
-"""class sessionn"""
+
+        def action_name(self):
+                for rec in self:
+                        rec.unlink()
+
+        def all_session(self):
+                for r in self:
+                        count=self.env["openacademy_sessions"].search_count([('course_id','=',r.name)])
+                        r.a=count
+
+        def all_session_valid(self):
+                for r in self:
+                        count=self.env["openacademy_sessions"].search_count(['&',('taken_seats','>=',50),('course_id','=',r.name)])
+                        r.b=count
+        def all_session_noValid(self):
+                for r in self:
+                        count=self.env["openacademy_sessions"].search_count(['&',('taken_seats','<',50),('course_id','=',r.name)])
+                        r.c=count
+        def enter(self):
+                pass
+
+#session
+
 class session (models.Model):
         _name = "openacademy_sessions"
         _description = "openAcademy sessions"
         name = fields.Char(string="name")
         startDate = fields.Date(default=fields.Date.today ,string="start date")
         duration = fields.Float(digts=(6, 2), help="Duration in days")
-        taken_seats = fields.Float(string="taken seats", compute="_taken_seats")
+        taken_seats = fields.Float(string="taken seats", compute="_taken_seats",store=True)
         endDate= fields.Date(string="End date" ,Store=True ,compute="_get_end_date" , inverse="_set_end_date" ,readonly=1)
-        active = fields.Boolean(default=True)
+        #active = fields.Boolean()
         seats = fields.Integer(string="Number of seats")
 
         #relations
@@ -111,3 +140,9 @@ class session (models.Model):
                                 r.endDate=r.startDate
                                 continue
                         r.endDate=(r.startDate - r.duration).days+1
+
+        #create course
+        def bt_create(self):
+                for rec in self:
+                        delta=self.env['open_academy.course'].create({'name':self.name})
+                        return delta

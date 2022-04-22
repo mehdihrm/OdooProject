@@ -20,18 +20,21 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','hr',"mail"],
 
     # always loaded
     
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
         'views/openacademy.xml',
         'views/res_partner.xml',
-        #'views/account_move.xml',
+        'views/wizard.xml',
         'data/sequence.xml'
+        
+        
 
     ],
     # only loaded in demonstration mode

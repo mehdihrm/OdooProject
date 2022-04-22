@@ -8,11 +8,23 @@
         <field name="arch" type="xml">
             <form string="course Form">
                 <sheet>
-                    <field name="photo" widget="image" class="oe_avatar"/>
+                <div class="oe_button_box" name="button_box">
+                            <button name="enter" type="object" string="all sessions" class="oe_stat_button">
+                                <field name="a" />
+                            </button>
+                            <button name="enter" type="object" string="session valid" class="oe_stat_button" >
+                                <field name="b" />
+                            </button>
+                            <button name="enter" type="object" string="session not valid" class="oe_stat_button">
+                                <field name="c" />
+                            </button>
+                        </div>
+                        <div><field name="photo" widget="image" class="oe_avatar"/></div>
                     <h1><field name="name_seq"/></h1>
                         <group>
                             <field name="name"/>
                             <field name="responsible_id"/>
+                            <field name="check"/>
                     </group>
                     <notebook>
                         <page string="page1">
@@ -37,13 +49,21 @@
             <field name="name">course.tree</field>
             <field name="model">open_academy.course</field>
             <field name="arch" type="xml">
-                <tree string="course tree" editable="top" >
+                <!--editable="top" edit from tree-->
+                <tree string="course tree"  >
                         <field name="name_seq"/>
                         <field name="name"/>
                         <field name="responsible_id"/>
                         <field name="description"/>
                         <field name="photo"/>
                         <field name="year"/>
+                        <field name="check"/>
+                        <button name="action_name" 
+                        type="object" 
+                        class="oe_highlight"
+                        string="delete"
+                        attrs="{'invisible':[('check','=',False)]}"
+                        />
                 </tree>
             </field>
         </record>
@@ -104,7 +124,6 @@
                         </div>
                         </t>
                     </templates>
-                    
                 </kanban>
             </field>
         </record>
@@ -117,11 +136,11 @@
         <field name="arch" type="xml">
             <form string="session Form">
                     <sheet>
+                        <button name="bt_create" string="create course" type="object" class="oe_highlight"/>
                         <group string="General">
                             <field name="course_id"/>
                             <field name="name"/>
                             <field name="instructor_id"/>
-                            <field name="active"/>
                         </group>
                         <group string="Schedule">
                             <field name="startDate"/>
@@ -158,7 +177,6 @@
                     <field name="startDate"/>
                     <field name="endDate" />
                     <field name="taken_seats" widget="progressbar"/>
-            
             </tree>
         </field>
     </record>
@@ -203,5 +221,29 @@
 
     <menuitem id="session_menu" name="session" parent="openacademy_menu" action="session_list"/>
 
+    <!--view form  wizard
+    <record model="ir.ui.view" id="wizard_form_view" >
+        <field name="name">wizard.form</field>
+        <field name="model">openacademy.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add addtendees">
+                <group>
+                    <field name="session_ids"></field>
+                    <field name="attendee_ids"></field>
+                </group>
+                <footer>
+                    <button name="subscribe" type="object" class="oe_stat_button" string="Subscribe"/>
+                    <button special="cancel" string="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <act_window 
+        id = "launch_session_wizard"
+        name="add attendees"
+        binding_model="openacademy_sessions"
+        res_model="openacademy.wizard"
+        view_mode="form"
+        target="new"/>-->
 
 </odoo>

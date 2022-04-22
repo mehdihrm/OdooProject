@@ -188,7 +188,7 @@
             
 
         </menuitem>
-         <menuitem id="society_first_level_menu_sells" name="Sells" parent="society.menu_root">
+        <menuitem id="society_first_level_menu_sells" name="Sells" parent="society.menu_root">
             
             <menuitem id="society_product_sell_menu_action" action="society.action_window6"/>
 

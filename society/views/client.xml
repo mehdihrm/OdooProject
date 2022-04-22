@@ -43,14 +43,10 @@
                         name="active"
                         domain="[('active','=','True')]"
                         />
-
-
                 <group expand="1" string="Group By">
                   <filter string="Birth Date" name="birth_date"
                   context="{'group_by':'birth_date','residual_visible':True}"/>
                 </group>
-                  
-                    
               </search>
             </field>
           </record>
