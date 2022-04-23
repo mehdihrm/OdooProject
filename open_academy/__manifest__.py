@@ -31,7 +31,7 @@
         'views/templates.xml',
         'views/openacademy.xml',
         'views/res_partner.xml',
-        'views/wizard.xml',
+        #'views/wizard.xml',
         'data/sequence.xml'
         
         
