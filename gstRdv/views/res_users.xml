@@ -1,20 +1,24 @@
-
 <odoo>
     <record id="view_users_form" model="ir.ui.view">
-            <field name="name">res.users.form.inherit.society</field>
-            <field name="model">res.users</field>
-            <field name="inherit_id" ref="base.view_users_form"/>
-            <field name="arch" type="xml">
-                <notebook position="inside">
-                    <page name="users_edit_form" string="My Name : ">
-                        <field name="specialite"/>
-                    </page>
-                    <page name="users_edit_form_2" string="My Name 2 :">
-                        <field name="myname"/>
-                    </page>
-                </notebook>
-            </field>
-        </record>
+        <field name="name">res.users.form.inherit.society</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="users_edit_form" string="Patient' report : ">
+                    <field name="name"/>
+                    <!--<field name="nom_patient"/>
+                    <field name="prenom_patient"/>
+                    <field name="adresse_patient"/>
+                    <field name="date_naissance"/>
+                    <field name="sexe_patient"/>-->
+                </page>
+                <!--<page string="My Rdvs">
+                    <field name="my_rdvs"/>
+                </page>-->
+            </notebook>
+        </field>
+    </record>
 
 
 </odoo>

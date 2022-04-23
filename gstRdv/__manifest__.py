@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','web'],
+    'depends': ['base','web', 'mail'],
 
     # always loaded
     'data': [
@@ -28,8 +28,8 @@
         'views/views.xml',
         'views/res_users.xml',
         'views/res_partner.xml',
-
         'data/sequenceCodes.xml',
+        # 'views/wizard.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode

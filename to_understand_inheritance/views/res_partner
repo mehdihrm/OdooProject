@@ -19,11 +19,5 @@
             </field>
         </record>
 
-        <record model="ir.actions.act.window" id="contact_list_action">
-            <field name="name">Contacts</field>
-            <field name="res.model">res.partner</field>
-            <field name="view">tree,form</field>
-        </record>
-
     </data>
 </odoo>

@@ -1,18 +1,36 @@
-
-
 <odoo>
     <record id="view_users_form" model="ir.ui.view">
-            <field name="name">res.partner.form.inherit.partner</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <notebook position="inside">
-                    <page name="users_partner_form" string="Kill Me: ">
-                        <field name="killMe"/>
-                    </page>
-                </notebook>
-            </field>
-        </record>
+        <field name="name">res.partner.form.inherit.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!--<field name="mobile" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>-->
+            <notebook position="inside">
+                <page string="Patient's Rapport">
+                    <field name="killMe"/>
+                    <!--<field name="killMe"/>
+                    <field name="nom_test"/>
+                    <field name="prenom"/>
+                    <field name="adresse"/>
+                    <field name="datenaissance"/>
+                    <field name="sexe"/>-->
+                </page>
+                <!--<page string="My Rdvs">
+                    <field name="myrdvs"/>
+                </page>-->
+            </notebook>
+        </field>
+    </record>
 
+    <record model="ir.actions.act_window" id="configuration_lst_patient">
+        <field name="name">Contacts</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem name="Contacts" id="contacts_menu" parent="gstrdv_menu_root" action="configuration_lst_patient"/>
 
 </odoo>

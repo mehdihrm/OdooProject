@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for library.theme -->
+        <record id="seq_library_theme" model="ir.sequence">
+            <field name="name">theme_code</field>
+            <field name="code">theme_code.sequence</field>
+            <field name="prefix">Thm</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for library.livre -->
+        <record id="seq_library_livre" model="ir.sequence">
+            <field name="name">livre_code</field>
+            <field name="code">livre_code.sequence</field>
+            <field name="prefix">Lvr</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

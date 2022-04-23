@@ -1,0 +1,132 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="library.list">
+            <field name="name">library livre</field>
+            <field name="model">library.livre</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="lvr_code"/>
+                    <field name="lvr_titre"/>
+                    <field name="lvr_autheur"/>
+                    <field name="lve_nbr_pages"/>
+                    <field name="lvr_nbr_exemplaire"/>
+                    <field name="lvr_prix"/>
+                    <field name="lvr_img"/>
+                    <field name="lvr_description"/>
+                    <field name="lvr_theme"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="library.list">
+            <field name="name">library livre</field>
+            <field name="model">library.livre</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="lvr_code" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <separator string="General Infos"/>
+                                <field name="lvr_titre"/>
+                                <field name="lvr_autheur"/>
+                                <field name="lvr_img"/>
+                            </group>
+                            <group>
+                                <separator string="extra infos"/>
+                                <field name="lvr_prix"/>
+                                <field name="lve_nbr_pages"/>
+                                <field name="lvr_prix"/>
+                                <field name="lvr_nbr_exemplaire"/>
+
+                            </group>
+                            <notebook>
+                                <page string="description">
+                                    <field name="lvr_description"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="library.list">
+            <field name="name">library theme</field>
+            <field name="model">library.theme</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="theme_code"/>
+                    <field name="theme_intitule"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="library.list">
+            <field name="name">library theme</field>
+            <field name="model">library.theme</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="theme_code" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <separator string="General Infos"/>
+                                <field name="theme_intitule"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="library_livre_action_window">
+            <field name="name">library_livre_act</field>
+            <field name="res_model">library.livre</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    nous avons encore pas des livre.
+                    :)
+                </p>
+                <p>Cliquez sur le button 'Create' pour ajouter une livre!!!</p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="library_theme_action_window">
+            <field name="name">library_theme_act</field>
+            <field name="res_model">library.theme</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    nous avons encore pas des themes.
+                    :)
+                </p>
+                <p>Cliquez sur le button 'Create' pour ajouter un theme!!!</p>
+            </field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="library" id="library.menu_root"/>
+        <!-- menu categories -->
+        <menuitem name="Livre" id="library_livre_menu" parent="library.menu_root" action="library_livre_action_window"/>
+        <menuitem name="Theme" id="library_theme_menu" parent="library.menu_root" action="library_theme_action_window"/>
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="library.menu_1_list" parent="library.menu_1"
+                      action="library.action_window"/>
+            <menuitem name="Server to list" id="library" parent="library.menu_2"
+                      action="library.action_server"/>
+        -->
+    </data>
+</odoo>
