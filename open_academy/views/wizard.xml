@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--view form  wizard-->
+    <record model="ir.ui.view" id="wizard_form_view" >
+        <field name="name">wizard.form</field>
+        <field name="model">openacademy.wizard</field>
+        <field name="arch" type="xml">
+            <form string="add addtendees">
+                <group>
+                    <field name="session_ids"></field>
+                    <field name="attendee_ids"></field>
+                </group>
+                <footer>
+                    <button name="subscribe" type="object" class="oe_stat_button" string="Subscribe"/>
+                    <button special="cancel" string="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="launch_session_wizard" model="ir.actions.act_window">
+        <field  name="name" >add attendees</field>
+        <field name="res_model">openacademy.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="wizard_form_view"/>
+        <field name="target">new</field>
+    </record> 
+
+    <menuitem
+        id="menu_wizard"
+        name="Bundle Report"
+        parent="main_openacademy_menu"
+        action="launch_session_wizard"/>
+
+
+
+    
+</odoo>

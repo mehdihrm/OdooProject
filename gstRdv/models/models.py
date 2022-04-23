@@ -147,7 +147,7 @@ class maladie(models.Model):
     _rec_name = "nomMaladie"
 
     codeMaladie = fields.Char(string="Code Maladie", required=True, readonly=True, index=True,
-                              default=lambda self: _('New'), help="this is the code that make each Maladie unique")
+                            default=lambda self: _('New'), help="this is the code that make each Maladie unique")
     nomMaladie = fields.Char(string="Nom Maladie", required=True)
     symptomes = fields.Many2many("gstrdv.symptomes", string="Les Symptomes")
 

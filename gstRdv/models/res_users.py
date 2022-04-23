@@ -1,6 +1,4 @@
 from odoo import models, fields, api, _
-
-
 class ResUsers(models.Model):
     _inherit = 'res.users'
     _description = 'customizing the users so that it will represent patient'

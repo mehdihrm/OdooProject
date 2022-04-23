@@ -13,3 +13,6 @@ class Partner(models.Model):
     # myrdvs = fields.One2many("gstrdv.rdvs", "codePatient", string="My Rdvs")
 
 
+    killMe = fields.Boolean("Kill Me",default=False)
+
+
