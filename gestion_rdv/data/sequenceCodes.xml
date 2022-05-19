@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for gstRdv.medecin -->
+        <record id="seq_gstrdv_medecin" model="ir.sequence">
+            <field name="name">Code Medecin</field>
+            <field name="code">gstrdv.medecin.sequence</field>
+            <field name="prefix">Med</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for gstRdv.specialite -->
+        <record id="seq_gstrdv_specialite" model="ir.sequence">
+            <field name="name">Code Specialite</field>
+            <field name="code">gstrdv.specialite.sequence</field>
+            <field name="prefix">Sep</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for gstRdv.patient -->
+        <record id="seq_gstrdv_patient" model="ir.sequence">
+            <field name="name">Code Patient</field>
+            <field name="code">gstrdv.patient.sequence</field>
+            <field name="prefix">Pat</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+         <!-- Sequences for gstRdv.rdv -->
+        <record id="seq_gstrdv_rdv" model="ir.sequence">
+            <field name="name">Code Rdv</field>
+            <field name="code">gstrdv.rdv.sequence</field>
+            <field name="prefix">RDV</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for gstRdv.maladie -->
+        <record id="seq_gstrdv_maladie" model="ir.sequence">
+            <field name="name">Code Maladie</field>
+            <field name="code">gstrdv.maladie.sequence</field>
+            <field name="prefix">MAL</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for gstRdv.symptome -->
+        <record id="seq_gstrdv_symptomes" model="ir.sequence">
+            <field name="name">Code Symptomes</field>
+            <field name="code">gstrdv.symptomes.sequence</field>
+            <field name="prefix">SYM</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for -->
+        <record id="seq_gstrdv_extras" model="ir.sequence">
+            <field name="name">Code Extras</field>
+            <field name="code">extras.sequence</field>
+            <field name="prefix">EXT</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
